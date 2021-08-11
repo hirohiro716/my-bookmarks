@@ -1,0 +1,23 @@
+{
+    
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/hirohiro716/scent-php/"
+        }
+    ],
+    
+    "require": {
+        "hirohiro716/scent-php" : "dev-master"
+    },
+    
+    "autoload": {
+        "psr-4": {
+            "hirohiro716\\MyBookmarks\\": "class/",
+            "hirohiro716\\MyBookmarks\\Auth\\": "class/auth/",
+            "hirohiro716\\MyBookmarks\\Database\\": "class/database/",
+            "hirohiro716\\MyBookmarks\\Setting\\": "class/setting/"
+        }
+    }
+    
+}
