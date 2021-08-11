@@ -1,0 +1,379 @@
+@charset "UTF-8";
+
+/********************
+ * CSS for all.
+ ********************/
+
+/*
+ * All elements style.
+ */
+* {
+    box-sizing: border-box;
+	margin: 0;
+    padding: 0;
+    font-weight: normal;
+    color: #333;
+    list-style-type: none;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
+h1 {
+    font-size: 2.2em;
+}
+
+h2 {
+    font-size: 1.8em;
+}
+
+a:link {
+    color: #036eb8;
+}
+
+a:visited {
+    color: #036eb8;
+}
+
+a:hover {
+    opacity: 0.5;
+}
+
+/*
+ * Button style.
+ */
+button {
+	padding: 0.5em 1em;
+	font-size: inherit;
+}
+
+_::-webkit-full-page-media, _:future, :root button {
+	-webkit-appearance: none;
+    border-radius: 0;
+    background: linear-gradient(#f9f9f9, #eee);
+}
+
+/*
+ * Input style.
+ */
+input[type="text"],
+input[type="number"],
+input[type="tel"],
+input[type="password"] {
+	padding: 0.2em 0.4em;
+    font-size: inherit;
+}
+
+/*
+ * Select style.
+ */
+select {
+    padding: 0.2em 0.4em;
+	font-size: inherit;
+}
+
+/*
+ * Textarea style.
+ */
+textarea {
+    padding: 0.2em 0.4em;
+    font-size: inherit;
+}
+
+/*
+ * Header style.
+ */
+header {
+    position: relative;
+    width: 100%;
+    padding: 2em 0 1em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    border-bottom: 1px solid #333;
+}
+
+/*
+ * Main contents style.
+ */
+section#main_contents {
+	position: relative;
+	padding: 2em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+/*
+ * Footer style.
+ */
+footer {
+    position: relative;
+    width: 100%;
+    padding: 1em 0 2em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    border-top: 1px solid #333;
+}
+
+/********************
+ * CSS for main page.
+ ********************/
+
+.IndexPage form {
+	width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 2em;
+}
+
+/*
+ * Section style.
+ */
+.IndexPage form section.block {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: left;
+    gap: 0.5em;
+}
+
+/*
+ * P style.
+ */
+.IndexPage form section.block p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2em;
+}
+
+/*
+ * Personal information style.
+ */
+.IndexPage form section.block input[name*="er_name"] {
+    width: calc(100% - 8em);
+}
+
+.IndexPage form section.block input[name*="er_honorific"] {
+    width: 3em;
+}
+
+.IndexPage form section.block input[name*="er_zipcode"] {
+    width: 7em;
+}
+
+.IndexPage form section.block input[name*="er_address"] {
+    width: calc(100% - 5em);
+}
+
+.IndexPage form section.block input[name*="er_building"] {
+    width: 14em;
+}
+
+.IndexPage form section.block input[name*="er_tel"] {
+    width: 10em;
+}
+
+/*
+ * Basic section style.
+ */
+.IndexPage form section#basic {
+	width: 100%;
+}
+
+.IndexPage form section#basic #reply_email_address {
+    width: 30em;
+    max-width: 100%;
+}
+
+/*
+ * Receiver section style.
+ */
+.IndexPage form section#receiver .title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
+/*
+ * Delivery section style.
+ */
+.IndexPage form section#delivery input#delivery_date {
+    width: 8em;
+}
+
+.IndexPage form section#delivery textarea#memo {
+    width: calc(100% - 5em);
+    min-height: 8em;
+}
+
+/*
+ * Product section style.
+ */
+.IndexPage form section#product .title {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.IndexPage form section#product tr:nth-child(odd) td {
+    padding: 1em 0 0.2em;
+}
+
+.IndexPage form section#product tr:nth-child(even) td {
+	padding-bottom: 1em;
+	border-bottom: 1px solid #ccc;
+}
+
+.IndexPage form section#product input[name*="product_code"] {
+    width: 4em;
+}
+
+.IndexPage form section#product input[name*="product_name"] {
+    width: calc(100% - 5em);
+}
+
+.IndexPage form section#product input[name*="product_price"] {
+    width: 6em;
+    margin-left: calc(100% - 16em);
+    text-align: right;
+}
+
+.IndexPage form section#product input[name*="product_quantity"] {
+    width: 4em;
+    text-align: right;
+}
+
+.IndexPage form section#product a.product_delete {
+    margin-left: 1em;
+}
+
+/*
+ * Side-by-side buttons style.
+ */
+section#main_contents .buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 2%;
+}
+
+section#main_contents .buttons button {
+    flex-grow: 1;
+    padding: 1em;
+}
+
+/********************
+ * CSS for setting auth page.
+ ********************/
+
+/*
+ * H2 style.
+ */
+.SettingAuthPage h2 {
+    padding-bottom: 0.5em;
+}
+
+/*
+ * H3 style.
+ */
+.SettingAuthPage h3 {
+    padding-top: 0.5em;
+}
+
+/*
+ * Form style.
+ */
+.SettingAuthPage form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1em;
+}
+
+.SettingAuthPage form p {
+	width: 100%;
+    text-align: center;
+}
+
+/*
+ * Label style.
+ */
+.SettingAuthPage label {
+    display: inline-block;
+}
+
+/*
+ * Button style.
+ */
+.SettingAuthPage form button {
+	margin-top: 1em;
+}
+
+/********************
+ * CSS for setting page.
+ ********************/
+
+/*
+ * H2 style.
+ */
+.SettingIndexPage h2 {
+    padding-bottom: 0.5em;
+}
+
+/*
+ * H3 style.
+ */
+.SettingIndexPage h3 {
+    padding-top: 0.5em;
+}
+
+/*
+ * Form style.
+ */
+.SettingIndexPage form {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1em;
+}
+
+.SettingIndexPage form p {
+    width: 100%;
+    text-align: center;
+}
+
+/*
+ * Label style.
+ */
+.SettingIndexPage label {
+	display: inline-block;
+}
+
+/*
+ * Button style.
+ */
+.SettingIndexPage form button {
+    margin-top: 1em;
+}

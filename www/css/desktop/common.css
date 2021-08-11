@@ -1,0 +1,52 @@
+@charset "UTF-8";
+
+/********************
+ * CSS for main page.
+ ********************/
+
+/*
+ * Section style.
+ */
+.IndexPage section.block {
+    width: 45%;
+}
+
+/********************
+ * CSS for setting auth page.
+ ********************/
+
+/*
+ * Input style.
+ */
+.SettingAuthPage form p input {
+    width: 55%;
+}
+
+/*
+ * Label style.
+ */
+.SettingAuthPage form p label {
+    width: 40%;
+    text-align: right;
+}
+
+/********************
+ * CSS for setting page.
+ ********************/
+
+/*
+ * Input style.
+ */
+.SettingIndexPage form p input[type="text"],
+.SettingIndexPage form p input[type="number"],
+.SettingIndexPage form p input[type="password"] {
+    width: 50%;
+}
+
+/*
+ * Label style.
+ */
+.SettingIndexPage form p label {
+    width: 40%;
+    text-align: right;
+}
