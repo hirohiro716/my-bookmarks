@@ -63,7 +63,7 @@ class Setting extends AbstractMultipleRecordMapper
         $hash = new Hash();
         $rootURL = new StringObject($_SERVER["SCRIPT_NAME"]);
         $hash->put(Name::const(Name::ROOT_URL), $rootURL->replace("try_initialization.php", "")->get());
-        $hash->put(Name::const(Name::SETTING_PASSWORD), "");
+        $hash->put(Name::const(Name::PASSWORD), "");
         $hash->put(Name::const(Name::AUTHENTICATION_FAILURE_JSON), "");
         return $hash;
     }
@@ -77,7 +77,7 @@ class Setting extends AbstractMultipleRecordMapper
                 $value = $this->getRecord()->get($name);
                 switch ($name) {
                     case Name::const(Name::ROOT_URL):
-                    case Name::const(Name::SETTING_PASSWORD):
+                    case Name::const(Name::PASSWORD):
                         $validator->addBlankCheck();
                         $validator->execute($value);
                         break;

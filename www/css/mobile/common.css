@@ -1,34 +1,32 @@
 @charset "UTF-8";
 
 /********************
- * CSS for main page.
- ********************/
-
-/*
- * Section style.
- */
-.IndexPage section.block {
-    width: 100%;
-}
-
-/********************
- * CSS for setting auth page.
+ * CSS for auth page.
  ********************/
 
 /*
  * Input style.
  */
-.SettingAuthPage form p input {
+.AuthPage form p input {
     width: 100%;
 }
 
 /*
  * Label style.
  */
-.SettingAuthPage form p label {
+.AuthPage form p label {
     width: 100%;
     text-align: left;
 }
+
+/********************
+ * CSS for main page.
+ ********************/
+
+
+
+
+
 
 /********************
  * CSS for setting page.

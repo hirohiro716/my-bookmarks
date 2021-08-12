@@ -10,35 +10,37 @@ use hirohiro716\MyBookmarks\Database\Database;
 use hirohiro716\Scent\ArrayHelper;
 use hirohiro716\Scent\Session;
 
-require "../vendor/autoload.php";
+require "vendor/autoload.php";
 
 /**
- * 設定ログインページのクラス。
+ * ログインページのクラス。
  * 
  * @author hiro
  */
-class SettingAuthPage extends AbstractWebPage
+class AuthPage extends AbstractWebPage
 {
     
     public function getTemplateFileLocation(): string
     {
-        return "setting/auth.tpl";
+        return "auth.tpl";
     }
     
 }
 
-$page = new SettingAuthPage();
+$page = new AuthPage();
 if ($page->isHTTPS() == false) {
+    // TODO
+    /*
     echo "Your connection is not secure.";
     exit();
+    */
 }
 // Processing of each mode
-$referer = $page->getGetValue("referer");
 $post = $page->getPostValues();
 $mode = new StringObject($post->get("mode"));
 switch ($mode) {
     case "auth":
-        $result = array("referer" => $referer);
+        $result = array();
         try {
             $database = new Database();
             $database->connect();
@@ -60,7 +62,7 @@ switch ($mode) {
                 exit();
             }
             // Verify
-            $passwordHash = $setting->fetchValue(Name::const(Name::SETTING_PASSWORD));
+            $passwordHash = $setting->fetchValue(Name::const(Name::PASSWORD));
             $passwordHasher = new PasswordHasher($post->get("password"));
             $result["successed"] = $passwordHasher->verify($passwordHash);
             if ($result["successed"]) {

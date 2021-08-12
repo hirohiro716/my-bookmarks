@@ -2,7 +2,7 @@
 
 <!--{block name=head}-->
 
-<title>認証 -出荷依頼-</title>
+<title>認証 - My Bookmarks -</title>
 
 <script type="text/javascript">
 $scent(function() {
@@ -11,7 +11,7 @@ $scent(function() {
         button.prop('disabled', true);
         $scent.postForm($('form'), function(result) {
             if (result.successed) {
-                window.location.href = '<!--{$root}-->setting/' + result.referer;
+                window.location.href = '<!--{$root}-->';
             } else {
                 alert('認証できませんでした。');
             }

@@ -8,7 +8,6 @@ use hirohiro716\MyBookmarks\Setting\SettingName as Name;
 use hirohiro716\Scent\PasswordHasher;
 use hirohiro716\MyBookmarks\Database\Database;
 use hirohiro716\Scent\Session;
-use hirohiro716\Scent\Hash;
 use hirohiro716\Scent\Validate\PropertyValidationException;
 
 require "../vendor/autoload.php";
@@ -30,15 +29,16 @@ class SettingIndexPage extends AbstractWebPage
 
 $page = new SettingIndexPage();
 if ($page->isHTTPS() == false) {
+    // TODO
+    /*
     echo "Your connection is not secure.";
     exit();
+    */
 }
 $session = new Session();
 if ($session->get("authenticated") !== true) {
     $url = new StringObject($_SERVER["SCRIPT_NAME"]);
-    $parts = new Hash($url->split("/"));
-    $referer = $parts->get($parts->size() - 1);
-    $page->redirect($url->replace("index.php", "auth.php?referer=" . $referer));
+    $page->redirect($url->replace("index.php", "auth.php"));
     exit();
 }
 // Processing of each mode
@@ -59,16 +59,16 @@ switch ($mode) {
             $setting = new Setting($database);
             $setting->edit();
             // Password to hash
-            $password = new StringObject($post->get(Name::const(Name::SETTING_PASSWORD)));
+            $password = new StringObject($post->get(Name::const(Name::PASSWORD)));
             if ($password->length() == 0) {
-                $password->set($setting->getRecord()->get(Name::const(Name::SETTING_PASSWORD)));
+                $password->set($setting->getRecord()->get(Name::const(Name::PASSWORD)));
             } else {
                 $passwordHasher = new PasswordHasher($password);
                 $password->set($passwordHasher->getHash());
             }
-            $post->put(Name::const(Name::SETTING_PASSWORD), $password->get());
+            $post->put(Name::const(Name::PASSWORD), $password->get());
             // Remove non-existent setting name
-            $postArray = array(Name::const(Name::EMAIL_SMTP_IS_USE_TLS)->getPhysicalName() => Database::BOOLEAN_VALUE_DISABLED);
+            $postArray = array();
             foreach (Name::properties() as $name) {
                 if ($post->isExistKey($name)) {
                     $postArray[$name->getPhysicalName()] = $post->get($name);

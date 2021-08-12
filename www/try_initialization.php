@@ -26,12 +26,12 @@ try {
     $database->connect();
     $setting = new Setting($database);
     $setting->edit();
-    $password = new StringObject($setting->getRecord()->get(Name::const(Name::SETTING_PASSWORD)));
-    $newPassword = new StringObject($get->get(Name::const(Name::SETTING_PASSWORD)));
+    $password = new StringObject($setting->getRecord()->get(Name::const(Name::PASSWORD)));
+    $newPassword = new StringObject($get->get(Name::const(Name::PASSWORD)));
     if (($password->length() == 0) != ($newPassword->length() == 0)) {
         if ($newPassword->length() > 0) {
             $passwordHasher = new PasswordHasher($newPassword);
-            $setting->getRecord()->put(Name::const(Name::SETTING_PASSWORD), $passwordHasher->getHash());
+            $setting->getRecord()->put(Name::const(Name::PASSWORD), $passwordHasher->getHash());
         }
         $setting->update();
         echo "ok";
