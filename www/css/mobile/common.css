@@ -49,6 +49,15 @@
 }
 
 /*
+ * Anchor style.
+ */
+.SettingIndexPage form p a {
+    width: 100%;
+    display: inline-block;
+    text-align: left;
+}
+
+/*
  * Label style.
  */
 .SettingIndexPage form p label {

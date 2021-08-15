@@ -6,6 +6,13 @@
 
 <script type="text/javascript">
 $scent(function() {
+    $('#bookmarklet_add').on('click', function() {
+        $('textarea#bookmarklet').load('<!--{$root}-->setting/bookmarklet_add.php', function() {
+            let textArea = $('textarea#bookmarklet');
+            textArea.text(encodeURI(textArea.text().split('  ').join('')));
+            prompt('作成したスクリプト', textArea.text());
+        });
+    });
     $('button:contains("保存")').bind('click', function() {
         let button = $(this);
         button.prop('disabled', true);
@@ -48,6 +55,14 @@ $scent(function() {
                 パスワード
             </label>
             <input type="password" id="<!--{$key}-->" name="<!--{$key}-->" placeholder="[変更なし]">
+        </p>
+        <p>
+            <label>
+                ブックマークレット
+            </label>
+            <a href="javascript:;" id="bookmarklet_add">ブックマーク追加用</a>
+            <textarea id="bookmarklet" style="display:none;">
+            </textarea>
         </p>
         <p>
             <button type="button">保存</button>

@@ -296,6 +296,8 @@ section#main_contents .buttons button {
  * Form style.
  */
 .SettingIndexPage form {
+    width: 100%;
+    max-width: 1000px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;

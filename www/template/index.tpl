@@ -6,7 +6,11 @@
 <script src="<!--{$root}-->javascript/bookmark_editor.js"></script>
 <script type="text/javascript">
 $scent(function() {
-    setEventHandler('<!--{$root}-->', '<!--{$token}-->', <!--{if $sent_values_by_get}-->true<!--{else}-->false<!--{/if}-->);
+    let idToScroll = '<!--{$smarty.get.scroll}-->';
+    <!--{if $sent_values_by_get}-->
+        idToScroll = 'new_row';
+    <!--{/if}-->
+    setEventHandler('<!--{$root}-->', '<!--{$token}-->', idToScroll);
 });
 </script>
 <!--{/block}-->
@@ -37,6 +41,7 @@ $scent(function() {
                     <div class="left">
                         <p>
                             <!--{assign var="key" value="id"}-->
+                            <a id="<!--{$record.$key}-->"></a>
                             <input type="hidden" name="<!--{$key}-->" value="<!--{$record.$key}-->">
                             <!--{assign var="key" value="icon_url"}-->
                             <img class="icon" src="<!--{$record.$key}-->">

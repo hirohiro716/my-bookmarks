@@ -1,7 +1,7 @@
 /**
  * Set event handler.
  */
-function setEventHandler(url, token, isSentInitialValueByGET) {
+function setEventHandler(url, token, idToScroll) {
 	/*
 	 * Search button
 	 */
@@ -121,7 +121,7 @@ function setEventHandler(url, token, isSentInitialValueByGET) {
         $scent.post(values, url, function(result) {
             if (result['successed']) {
                 alert('保存しました。');
-                if (isSentInitialValueByGET) {
+                if (idToScroll == 'new_row') {
                 	location.href = url;
                 } else {
                 	location.reload();
@@ -165,12 +165,17 @@ function setEventHandler(url, token, isSentInitialValueByGET) {
         });
     });
     /*
-     * Branch when the initial value is GET sent
+     * Scroll to a specific ID
      */
-	if (isSentInitialValueByGET) {
+	if (idToScroll == 'new_row') {
 	    $('button:contains("追加")').hide();
-	    $scent.smoothScroll($('#new_row'), 500);
 	} else {
 	    $('#new_row').hide();
 	}
+    if (idToScroll.length > 0) {
+        let scrollTo = $('#' + idToScroll);
+        if (scrollTo.length > 0) {
+            $scent.smoothScroll(scrollTo, 500, -50);
+        }
+    }
 }
