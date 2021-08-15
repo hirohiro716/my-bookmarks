@@ -10,9 +10,23 @@ let links = document.getElementsByTagName("link");
 for (let index = 0; index < links.length; index++) {
     let link = links[index];
     let attribute = link.getAttribute("rel");
-    if (attribute == "icon" || attribute == "shortcut icon") {
-        parameters["icon_url"] = link.href;
-        break;
+    if (typeof attribute !== "undefined" && typeof link.href !== "undefined") {
+        if (attribute == "icon" || attribute == "shortcut icon") {
+            parameters["icon_url"] = link.href;
+            break;
+        }
+    }
+}
+if (typeof parameters["icon_url"] === "undefined") {
+    for (let index = 0; index < links.length; index++) {
+        let link = links[index];
+        let attribute = link.getAttribute("rel");
+        if (typeof attribute !== "undefined" && typeof link.href !== "undefined") {
+            if (attribute.indexOf("icon") > 0) {
+                parameters["icon_url"] = link.href;
+                break;
+            }
+        }
     }
 }
 let queryString = "";
