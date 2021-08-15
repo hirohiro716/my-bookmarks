@@ -124,7 +124,8 @@ switch ($mode) {
 // Create token
 $page->assign("token", $session->createToken());
 // Fetch records
-$keyword = new StringObject($page->getGetValue("keyword"));
+$get = $page->getGetValues();
+$keyword = new StringObject($get->get("keyword"));
 $whereSetArray = array();
 if ($keyword->length() > 0) {
     $keyword = $keyword->sanitize();
@@ -147,4 +148,16 @@ $database->connect();
 $bookmark = new Bookmark($database);
 $records = $bookmark->search($whereSetArray, "", "ORDER BY " . Column::const(Column::SORT_NUMBER));
 $page->assign("records", $records);
+// Initial value sent by GET
+$isSentInitialValueByGET = false;
+foreach (Column::columns() as $column) {
+    if ($get->isExistKey($column)) {
+        $isSentInitialValueByGET = true;
+    }
+}
+if ($isSentInitialValueByGET) {
+    $sentValues = $bookmark->getRecord();
+    $sentValues->addArray($get->getArray());
+    $page->assign("sent_values_by_get", $sentValues->getArray());
+}
 $page->display();

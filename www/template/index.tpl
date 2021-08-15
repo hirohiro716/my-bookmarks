@@ -6,7 +6,7 @@
 <script src="<!--{$root}-->javascript/bookmark_editor.js"></script>
 <script type="text/javascript">
 $scent(function() {
-    setEventHandler('<!--{$root}-->', '<!--{$token}-->');
+    setEventHandler('<!--{$root}-->', '<!--{$token}-->', <!--{if $sent_values_by_get}-->true<!--{else}-->false<!--{/if}-->);
 });
 </script>
 <!--{/block}-->
@@ -75,29 +75,29 @@ $scent(function() {
                 情報がありません。
             </p>
         <!--{/if}-->
-        <div id="new_row" class="row" style="display:none;">
+        <div id="new_row" class="row">
             <div class="left">
                 <p>
-                    <img class="icon">
                     <!--{assign var="key" value="icon_url"}-->
-                    <input type="hidden" name="<!--{$key}-->">
+                    <img class="icon" src="<!--{$sent_values_by_get.$key}-->">
+                    <input type="hidden" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->">
                     <!--{assign var="key" value="name"}-->
-                    <input type="text" name="<!--{$key}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="url"}-->
                     <label for="<!--{$key}-->">URL:</label>
-                    <input type="text" name="<!--{$key}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="labeling"}-->
                     <label for="<!--{$key}-->">ラベル:</label>
-                    <input type="text" name="<!--{$key}-->" style="width:calc(100% - 8em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" style="width:calc(100% - 8em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="sort_number"}-->
                     <label for="<!--{$key}-->">並び順:</label>
-                    <input type="number" name="<!--{$key}-->" style="width:5em;">
+                    <input type="number" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" style="width:5em;">
                 </p>
             </div>
             <div class="right">
@@ -110,7 +110,6 @@ $scent(function() {
     <section>
         <button type="button">追加</button>
     </section>
-    
 </section>
 
 <!--{/block}-->

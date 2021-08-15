@@ -1,7 +1,7 @@
 /**
  * Set event handler.
  */
-function setEventHandler(url, token) {
+function setEventHandler(url, token, isSentInitialValueByGET) {
 	/*
 	 * Search button
 	 */
@@ -121,7 +121,11 @@ function setEventHandler(url, token) {
         $scent.post(values, url, function(result) {
             if (result['successed']) {
                 alert('保存しました。');
-            	location.reload();
+                if (isSentInitialValueByGET) {
+                	location.href = url;
+                } else {
+                	location.reload();
+                }
             } else {
                 $.each(result['cause'], function(name, value) {
                     row.find('[name="' + name + '"]').focus();
@@ -137,6 +141,7 @@ function setEventHandler(url, token) {
      * Add button
      */
     $('button:contains("追加")').on('click', function(event) {
+    	let button = $(this);
         let row = $('#new_row');
         let values = {};
         values['mode'] = 'fetch_default_record';
@@ -149,6 +154,7 @@ function setEventHandler(url, token) {
                 });
                 let img = row.find('.left').find('img');
                 img.attr('src', img.next().val());
+                button.hide();
                 row.fadeIn();
                 previousRow = row;
             } else {
@@ -158,4 +164,13 @@ function setEventHandler(url, token) {
             alert('通信に失敗しました。');
         });
     });
+    /*
+     * Branch when the initial value is GET sent
+     */
+	if (isSentInitialValueByGET) {
+	    $('button:contains("追加")').hide();
+	    $scent.smoothScroll($('#new_row'), 500);
+	} else {
+	    $('#new_row').hide();
+	}
 }
