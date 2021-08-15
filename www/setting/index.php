@@ -4,11 +4,12 @@ use hirohiro716\MyBookmarks\AbstractWebPage;
 use hirohiro716\Scent\StringObject;
 use hirohiro716\Scent\JSON;
 use hirohiro716\MyBookmarks\Setting\Setting;
-use hirohiro716\MyBookmarks\Setting\SettingName as Name;
+use hirohiro716\MyBookmarks\Setting\SettingProperty as Property;
 use hirohiro716\Scent\PasswordHasher;
 use hirohiro716\MyBookmarks\Database\Database;
-use hirohiro716\Scent\Session;
 use hirohiro716\Scent\Validate\PropertyValidationException;
+use hirohiro716\MyBookmarks\Auth\Authenticator;
+use hirohiro716\MyBookmarks\Session;
 
 require "../vendor/autoload.php";
 
@@ -28,20 +29,17 @@ class SettingIndexPage extends AbstractWebPage
 }
 
 $page = new SettingIndexPage();
-if ($page->isHTTPS() == false) {
-    // TODO
-    /*
+if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
     echo "Your connection is not secure.";
     exit();
-    */
 }
-$session = new Session();
-if ($session->get("authenticated") !== true) {
+if (Authenticator::isAuthenticated() != true) {
     $url = new StringObject($_SERVER["SCRIPT_NAME"]);
-    $page->redirect($url->replace("index.php", "auth.php"));
+    $page->redirect($url->replace("setting/index.php", "auth.php"));
     exit();
 }
 // Processing of each mode
+$session = new Session();
 $post = $page->getPostValues();
 $mode = new StringObject($post->get("mode"));
 switch ($mode) {
@@ -56,20 +54,21 @@ switch ($mode) {
         try {
             $database = new Database();
             $database->connect();
+            $database->beginTransaction();
             $setting = new Setting($database);
             $setting->edit();
             // Password to hash
-            $password = new StringObject($post->get(Name::const(Name::PASSWORD)));
+            $password = new StringObject($post->get(Property::const(Property::PASSWORD)));
             if ($password->length() == 0) {
-                $password->set($setting->getRecord()->get(Name::const(Name::PASSWORD)));
+                $password->set($setting->getRecord()->get(Property::const(Property::PASSWORD)));
             } else {
                 $passwordHasher = new PasswordHasher($password);
                 $password->set($passwordHasher->getHash());
             }
-            $post->put(Name::const(Name::PASSWORD), $password->get());
+            $post->put(Property::const(Property::PASSWORD), $password->get());
             // Remove non-existent setting name
             $postArray = array();
-            foreach (Name::properties() as $name) {
+            foreach (Property::properties() as $name) {
                 if ($post->isExistKey($name)) {
                     $postArray[$name->getPhysicalName()] = $post->get($name);
                 }
@@ -78,6 +77,7 @@ switch ($mode) {
             $setting->validate();
             $setting->normalize();
             $setting->update();
+            $database->commit();
             $result["successed"] = true;
         } catch (PropertyValidationException $exception) {
             $result["message"] = $exception->getDetailMessage();

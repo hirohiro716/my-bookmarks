@@ -2,6 +2,7 @@
 /* Drop Tables */
 
 DROP TABLE [bookmark];
+DROP TABLE [cookie_authentication];
 DROP TABLE [setting];
 
 
@@ -11,12 +12,20 @@ DROP TABLE [setting];
 
 CREATE TABLE [bookmark]
 (
-	[url] text NOT NULL UNIQUE,
+	[id] integer NOT NULL UNIQUE PRIMARY KEY AUTOINCREMENT,
+	[url] text NOT NULL,
 	[name] text NOT NULL,
 	[icon_url] text,
 	[labeling] text,
-	[sort_number] integer NOT NULL,
-	PRIMARY KEY ([url])
+	[sort_number] integer NOT NULL
+);
+
+
+CREATE TABLE [cookie_authentication]
+(
+	[id] text NOT NULL UNIQUE,
+	[access_time] text NOT NULL,
+	PRIMARY KEY ([id])
 );
 
 

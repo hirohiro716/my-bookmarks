@@ -23,10 +23,17 @@
  * CSS for main page.
  ********************/
 
+/*
+ * Rows style.
+ */
+.IndexPage #rows .row .left {
+    width: calc(100% - 3em);
+}
 
-
-
-
+.IndexPage #rows .row .right {
+    width: 2em;
+    text-align: right;
+}
 
 /********************
  * CSS for setting page.

@@ -8,7 +8,7 @@ use hirohiro716\Scent\AbstractProperty;
  * 
  * @author hiro
  */
-class SettingName extends AbstractProperty
+class SettingProperty extends AbstractProperty
 {
     
     public const ROOT_URL = 0;

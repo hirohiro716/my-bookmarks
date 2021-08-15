@@ -104,7 +104,7 @@ header {
  */
 section#main_contents {
 	position: relative;
-	padding: 2em;
+	padding: 2em 1em;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -132,7 +132,7 @@ section#main_contents .buttons {
     width: 100%;
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     align-items: center;
     gap: 2%;
 }
@@ -187,21 +187,99 @@ section#main_contents .buttons button {
  * CSS for main page.
  ********************/
 
-.IndexPage form {
-	width: 100%;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    gap: 2em;
+/*
+ * Menu style.
+ */
+.IndexPage #menu {
+    width: 100%;
+    padding: 1em 0;
+    text-align: right;
+    overflow: hidden;
 }
 
+.IndexPage #menu > * {
+    vertical-align: middle;
+    margin-right: 0.5em;
+}
 
+.IndexPage #menu input {
+    width: 8em;
+    font-size: 80%;
+}
 
+.IndexPage #menu a {
+    height: 2em;
+    display: inline-block;
+    text-decoration: none;
+    color: #33a;
+}
 
+.IndexPage #menu a:hover {
+    opacity: 0.6;
+}
 
+.IndexPage #menu a:active {
+    opacity: 0.4;
+}
 
+.IndexPage #menu a img {
+    height: 100%;
+}
 
+/*
+ * Rows style.
+ */
+.IndexPage #rows {
+    width: 100%;
+    max-width: 1000px;
+}
+
+.IndexPage #rows .row {
+    width: 100%;
+    margin-bottom: 1em;
+    padding-bottom: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+}
+
+.IndexPage #rows .row .left p {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.IndexPage #rows .row .left p .icon {
+    height: 1em;
+    cursor: pointer;
+}
+
+.IndexPage #rows .row .left p label {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.IndexPage #rows .row .left p input {
+    margin: 0.1em;
+    border: none;
+}
+
+.IndexPage #rows .row .right a {
+    width: 1.5em;
+    display: inline-block;
+    text-decoration: none;
+}
+
+.IndexPage #rows .row .right a img {
+    width: 100%;
+}
+
+.IndexPage #rows .row .right a[disabled="disabled"] img {
+    opacity: 0.2;
+}
 
 /********************
  * CSS for setting page.

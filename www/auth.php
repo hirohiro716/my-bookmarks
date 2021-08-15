@@ -3,12 +3,8 @@
 use hirohiro716\MyBookmarks\AbstractWebPage;
 use hirohiro716\Scent\StringObject;
 use hirohiro716\Scent\JSON;
-use hirohiro716\MyBookmarks\Setting\Setting;
-use hirohiro716\MyBookmarks\Setting\SettingName as Name;
-use hirohiro716\Scent\PasswordHasher;
 use hirohiro716\MyBookmarks\Database\Database;
-use hirohiro716\Scent\ArrayHelper;
-use hirohiro716\Scent\Session;
+use hirohiro716\MyBookmarks\Auth\Authenticator;
 
 require "vendor/autoload.php";
 
@@ -28,59 +24,33 @@ class AuthPage extends AbstractWebPage
 }
 
 $page = new AuthPage();
-if ($page->isHTTPS() == false) {
-    // TODO
-    /*
+if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
     echo "Your connection is not secure.";
     exit();
-    */
 }
 // Processing of each mode
-$post = $page->getPostValues();
-$mode = new StringObject($post->get("mode"));
+$request = $page->getRequestValues();
+$mode = new StringObject($request->get("mode"));
 switch ($mode) {
     case "auth":
-        $result = array();
+        $result = array("successed" => false);
+        $password = $page->getPostValue("password");
         try {
             $database = new Database();
             $database->connect();
-            $setting = new Setting($database);
-            // Check the number of authentication failures
-            $authenticationFailureArray = array();
-            $authenticationFailureJSON = $setting->fetchValue(Name::const(Name::AUTHENTICATION_FAILURE_JSON));
-            if ($authenticationFailureJSON) {
-                $json = new JSON($authenticationFailureJSON);
-                $authenticationFailureArray = $json->toArray();
+            if (Authenticator::execute($password, $database)) {
+                $result["successed"] = true;
             }
-            $ipAddress = $_SERVER["REMOTE_ADDR"];
-            $numberOfAuthenticationFailures = 0;
-            if (ArrayHelper::isExistKey($authenticationFailureArray, $ipAddress)) {
-                $numberOfAuthenticationFailures = $authenticationFailureArray[$ipAddress];
-            }
-            if ($numberOfAuthenticationFailures >= 3) {
-                header('HTTP', true, 500);
-                exit();
-            }
-            // Verify
-            $passwordHash = $setting->fetchValue(Name::const(Name::PASSWORD));
-            $passwordHasher = new PasswordHasher($post->get("password"));
-            $result["successed"] = $passwordHasher->verify($passwordHash);
-            if ($result["successed"]) {
-                $authenticationFailureJSON = "";
-                $session = new Session();
-                $session->put("authenticated", true);
-            } else {
-                $authenticationFailureArray[$ipAddress] = $numberOfAuthenticationFailures + 1;
-                $authenticationFailureJSON = JSON::fromArray($authenticationFailureArray);
-            }
-            $setting->edit();
-            $setting->getRecord()->put(Name::const(Name::AUTHENTICATION_FAILURE_JSON), $authenticationFailureJSON);
-            $setting->update();
         } catch (Exception $exception) {
             $result["message"] = $exception->getMessage();
         }
         echo JSON::fromArray($result);
         exit();
+    case "logout":
+        Authenticator::logout();
+        $url = new StringObject($_SERVER["SCRIPT_NAME"]);
+        $page->redirect($url->replace("auth.php", "index.php"));
+        break;
 }
 $page->display();
 

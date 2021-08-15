@@ -11,7 +11,7 @@ use hirohiro716\Scent\Validate\ValueValidator;
 use hirohiro716\Scent\StringObject;
 use hirohiro716\Scent\Database\WhereSet;
 use hirohiro716\Scent\Helper;
-use hirohiro716\MyBookmarks\Setting\SettingName as Name;
+use hirohiro716\MyBookmarks\Setting\SettingProperty as Property;
 use hirohiro716\MyBookmarks\Setting\SettingColumn as Column;
 use hirohiro716\MyBookmarks\Database\Database;
 use hirohiro716\Scent\Hashes;
@@ -50,7 +50,7 @@ class Setting extends AbstractMultipleRecordMapper
      */
     public function getProperties(): Properties
     {
-        return Name::properties();
+        return Property::properties();
     }
     
     public function getColumns(): Columns
@@ -62,26 +62,26 @@ class Setting extends AbstractMultipleRecordMapper
     {
         $hash = new Hash();
         $rootURL = new StringObject($_SERVER["SCRIPT_NAME"]);
-        $hash->put(Name::const(Name::ROOT_URL), $rootURL->replace("try_initialization.php", "")->get());
-        $hash->put(Name::const(Name::PASSWORD), "");
-        $hash->put(Name::const(Name::AUTHENTICATION_FAILURE_JSON), "");
+        $hash->put(Property::const(Property::ROOT_URL), $rootURL->replace("try_initialization.php", "")->get());
+        $hash->put(Property::const(Property::PASSWORD), "");
+        $hash->put(Property::const(Property::AUTHENTICATION_FAILURE_JSON), "");
         return $hash;
     }
     
     public function validate(): void
     {
         $exception = new PropertyValidationException("入力されている情報に不備があります。");
-        foreach (Name::properties() as $name) {
+        foreach (Property::properties() as $name) {
             try {
                 $validator = new ValueValidator($name->getLogicalName());
                 $value = $this->getRecord()->get($name);
                 switch ($name) {
-                    case Name::const(Name::ROOT_URL):
-                    case Name::const(Name::PASSWORD):
+                    case Property::const(Property::ROOT_URL):
+                    case Property::const(Property::PASSWORD):
                         $validator->addBlankCheck();
                         $validator->execute($value);
                         break;
-                    case Name::const(Name::AUTHENTICATION_FAILURE_JSON):
+                    case Property::const(Property::AUTHENTICATION_FAILURE_JSON):
                         break;
                 }
             } catch (ValidationException $innerException) {
@@ -146,10 +146,10 @@ class Setting extends AbstractMultipleRecordMapper
     /**
      * 設定値を取得する。
      * 
-     * @param SettingName $name
+     * @param SettingProperty $name
      * @return string
      */
-    public function fetchValue(SettingName $name): string
+    public function fetchValue(SettingProperty $name): string
     {
         $whereSet = new WhereSet();
         $whereSet->addEqual(Column::const(Column::NAME)->getPhysicalName(), $name->getPhysicalName());
@@ -164,11 +164,11 @@ class Setting extends AbstractMultipleRecordMapper
     /**
      * 設定値を取得する。
      * 
-     * @param SettingName $name
+     * @param SettingProperty $name
      * @param Database $database 接続済みDatabaseインスタンス
      * @return string
      */
-    public static function fetchValueStatic(SettingName $name, $database = null): string
+    public static function fetchValueStatic(SettingProperty $name, $database = null): string
     {
         if (Helper::instanceIsThisName($database, "hirohiro716\MyBookmarks\Database\Database") == false) {
             $database = new Database();
