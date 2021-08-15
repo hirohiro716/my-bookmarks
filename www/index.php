@@ -136,7 +136,7 @@ if ($keyword->length() > 0) {
             case Column::const(Column::ICON_URL);
             case Column::const(Column::LABELING);
             $whereSet = new WhereSet();
-            $whereSet->addLike("LOWER(" . $column . ")", "%" . $keyword->toHalf()->toLower() . "%");
+            $whereSet->addLike("LOWER(" . $column . ")", "%" . $keyword->toLower() . "%");
             $whereSetArray[] = $whereSet;
             break;
         }
