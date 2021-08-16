@@ -1,7 +1,7 @@
 <!--{extends file="frame.tpl"}-->
 
 <!--{block name=head}-->
-<title><!--{$application_name}--></title>
+<title>My Bookmarks</title>
 
 <script src="<!--{$root}-->javascript/bookmark_editor.js"></script>
 <script type="text/javascript">
