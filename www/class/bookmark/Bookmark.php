@@ -40,7 +40,7 @@ class Bookmark extends AbstractRecordMapper
         try {
             $database = $this->getDatabase();
             // icon URL
-            $hash->put(Column::const(Column::ICON_URL), Setting::fetchValueStatic(Property::const(Property::ROOT_URL), $database) . "media/favicon.svg");
+            $hash->put(Column::const(Column::ICON_URL), Setting::fetchValueStatic(Property::const(Property::ROOT_URL), $database) . "media/internet.svg");
             // Sort number
             $sql = new StringObject("SELECT MAX(");
             $sql->append(Column::const(Column::SORT_NUMBER));
