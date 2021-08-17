@@ -11,10 +11,10 @@ use hirohiro716\Scent\Validate\ValidationException;
 use hirohiro716\Scent\Validate\ValueValidator;
 use hirohiro716\Scent\Validate\CauseProperty;
 use hirohiro716\Scent\StringObject;
-use hirohiro716\MyBookmarks\Database\Database;
 use hirohiro716\MyBookmarks\Setting\Setting;
 use hirohiro716\MyBookmarks\Setting\SettingProperty as Property;
 use hirohiro716\Scent\Helper;
+use hirohiro716\Scent\ArrayHelper;
 
 /**
  * ブックマーク情報をデータベースに入出力するクラス。
@@ -38,8 +38,7 @@ class Bookmark extends AbstractRecordMapper
     {
         $hash = new Hash();
         try {
-            $database = new Database();
-            $database->connect();
+            $database = $this->getDatabase();
             // icon URL
             $hash->put(Column::const(Column::ICON_URL), Setting::fetchValueStatic(Property::const(Property::ROOT_URL), $database) . "media/favicon.svg");
             // Sort number
@@ -59,6 +58,25 @@ class Bookmark extends AbstractRecordMapper
         } catch (Exception $exception) {
         }
         return $hash;
+    }
+    
+    /**
+     * 現在のレコードにセットされているURLを元に直下のアイコンURLを設定する。
+     */
+    public function setIconOfDirectlyBelow(): void
+    {
+        $url = new StringObject($this->getRecord()->get(Column::const(Column::URL)));
+        $parts = $url->split("://");
+        if ($url->length() == 0 || ArrayHelper::count($parts) < 2) {
+            return;
+        }
+        $protocol = $parts[0];
+        $domain = new StringObject($parts[1]);
+        $domain = new StringObject($domain->split("/")[0]);
+        $iconURL = $protocol . "://" . $domain . "/favicon.ico";
+        if (Helper::isExistURL($iconURL, 1)) {
+            $this->getRecord()->put(Column::const(Column::ICON_URL), $iconURL);
+        }
     }
     
     public function insert(): void

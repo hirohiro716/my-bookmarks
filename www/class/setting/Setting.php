@@ -1,7 +1,6 @@
 <?php
 namespace hirohiro716\MyBookmarks\Setting;
 
-use hirohiro716\Scent\Encrypter;
 use hirohiro716\Scent\Hash;
 use hirohiro716\Scent\Database\AbstractMultipleRecordMapper;
 use hirohiro716\Scent\Database\Columns;
@@ -17,7 +16,6 @@ use hirohiro716\MyBookmarks\Database\Database;
 use hirohiro716\Scent\Hashes;
 use hirohiro716\Scent\Validate\PropertyValidationException;
 use hirohiro716\Scent\Validate\CauseProperty;
-use hirohiro716\Scent\Filesystem\File;
 
 /**
  * 設定情報をデータベースに入出力するクラス。
@@ -176,76 +174,6 @@ class Setting extends AbstractMultipleRecordMapper
         }
         $instance = new self($database);
         return $instance->fetchValue($name);
-    }
-    
-    private const ENCRYPT_KEY_FILE_LOCATION = __DIR__ . "/../../database/key";
-    
-    /**
-     * パスワード暗号化用のキーファイルを作成する。
-     */
-    public static function createFileOfEncryptKey(): void
-    {
-        $file = new File(self::ENCRYPT_KEY_FILE_LOCATION);
-        $file->writeAll(StringObject::createRandomString(32));
-        $file->changeMode("0660");
-    }
-    
-    /**
-     * パスワード暗号化用のキーを読み込む。
-     *
-     * @return string パスワード暗号化用のキー
-     */
-    public static function readEncryptKey(): string
-    {
-        $file = new File(self::ENCRYPT_KEY_FILE_LOCATION);
-        return $file->readAll();
-    }
-    
-    private const ENCRYPT_IV_FILE_LOCATION = __DIR__ . "/../../database/iv";
-    
-    /**
-     * パスワード暗号化用のivファイルを作成する。
-     *
-     * @param string $iv
-     */
-    public static function createFileOfEncryptIV(): void
-    {
-        $file = new File(self::ENCRYPT_IV_FILE_LOCATION);
-        $file->writeAll(Encrypter::createIV());
-        $file->changeMode("0660");
-    }
-    
-    /**
-     * パスワード暗号化用のivを読み込む。
-     *
-     * @return string パスワード暗号化用のiv
-     */
-    public static function readEncryptIV(): string
-    {
-        $file = new File(self::ENCRYPT_IV_FILE_LOCATION);
-        return $file->readAll();
-    }
-    
-    /**
-     * 設定値を暗号化する。
-     *
-     * @param string $decrypted
-     */
-    public static function encrypt(string $decrypted): string
-    {
-        $encrypter = new Encrypter(Setting::readEncryptKey(), Setting::readEncryptIV());
-        return $encrypter->encrypt($decrypted);
-    }
-    
-    /**
-     * 設定値を復号化する。
-     *
-     * @param string $encrypted
-     */
-    public static function decrypt(string $encrypted): string
-    {
-        $encrypter = new Encrypter(Setting::readEncryptKey(), Setting::readEncryptIV());
-        return $encrypter->decrypt($encrypted);
     }
     
     /**

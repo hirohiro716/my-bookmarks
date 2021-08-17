@@ -11,6 +11,9 @@ $scent(function() {
         idToScroll = 'new_row';
     <!--{/if}-->
     setEventHandler('<!--{$root}-->', '<!--{$token}-->', idToScroll);
+    
+    
+    
 });
 </script>
 <!--{/block}-->
@@ -51,7 +54,9 @@ $scent(function() {
                         </p>
                         <p>
                             <!--{assign var="key" value="url"}-->
-                            <label for="<!--{$key}-->">URL:</label>
+                            <a href="javascript:;">
+                                <label for="<!--{$key}-->">URL:</label>
+                            </a>
                             <input type="text" name="<!--{$key}-->" value="<!--{$record.$key|escape}-->" original_value="<!--{$record.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                         </p>
                         <p>
@@ -75,8 +80,8 @@ $scent(function() {
                     </div>
                 </div>
             <!--{/foreach}-->
-        <!--{else}-->
-            <p style="margin:3em 0 2em;">
+        <!--{elseif !$sent_values_by_get}-->
+            <p id="nothing">
                 情報がありません。
             </p>
         <!--{/if}-->
@@ -114,6 +119,16 @@ $scent(function() {
     </section>
     <section>
         <button type="button">追加</button>
+        <button type="button">HTMLからインポート</button>
+    </section>
+    <section id="import_section" style="display:none;">
+        <label>HTMLソースからインポート</label>
+        <textarea placeholder="<!DOCTYPE NETSCAPE-Bookmark-file-1>"></textarea>
+        <p>
+            <img src="<!--{$root}-->media/wait_circle.svg" style="display:none;">
+            <button type="button">インポート</button>
+            <button type="button">キャンセル</button>
+        </p>
     </section>
 </section>
 

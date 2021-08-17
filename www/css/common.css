@@ -16,6 +16,18 @@
     list-style-type: none;
 }
 
+/*
+ * Animation style.
+ */
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 html {
     height: 100%;
 }
@@ -83,6 +95,13 @@ select {
 textarea {
     padding: 0.2em 0.4em;
     font-size: inherit;
+}
+
+/*
+ * Wait circle style.
+ */
+img[src$="media/wait_circle.svg"] {
+    animation: rotate 2.5s linear infinite;
 }
 
 /*
@@ -234,6 +253,10 @@ section#main_contents .buttons button {
     max-width: 1000px;
 }
 
+.IndexPage #rows p#nothing {
+    margin: 3em 0 2em;
+}
+
 .IndexPage #rows .row {
     width: 100%;
     margin-bottom: 1em;
@@ -253,6 +276,7 @@ section#main_contents .buttons button {
 }
 
 .IndexPage #rows .row .left p .icon {
+    width: 1em;
     height: 1em;
     cursor: pointer;
 }
@@ -279,6 +303,52 @@ section#main_contents .buttons button {
 
 .IndexPage #rows .row .right a[disabled="disabled"] img {
     opacity: 0.2;
+}
+
+/*
+ * Import section style.
+ */
+.IndexPage #import_section {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: #fff;
+}
+
+.IndexPage #import_section > * {
+    margin-bottom: 0.5em;
+}
+
+.IndexPage #import_section label {
+    width: 100%;
+}
+
+.IndexPage #import_section textarea {
+    width: 100%;
+    height: calc(100% - 6em);
+}
+
+.IndexPage #import_section p {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.IndexPage #import_section p > * {
+    margin-left: 0.5em;
+}
+
+.IndexPage #import_section p img {
+    width: 2em;
 }
 
 /********************

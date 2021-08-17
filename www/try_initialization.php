@@ -6,22 +6,11 @@ use hirohiro716\MyBookmarks\Setting\SettingProperty as Property;
 use hirohiro716\Scent\StringObject;
 use hirohiro716\Scent\PasswordHasher;
 use hirohiro716\Scent\Hash;
-use hirohiro716\Scent\Filesystem\IOException;
 
 require "vendor/autoload.php";
 
 $get = new Hash($_GET);
 try {
-    try {
-        Setting::readEncryptKey();
-    } catch (IOException $exception) {
-        Setting::createFileOfEncryptKey();
-    }
-    try {
-        Setting::readEncryptIV();
-    } catch (IOException $exception) {
-        Setting::createFileOfEncryptIV();
-    }
     $database = new Database();
     $database->connect();
     $database->beginTransaction();

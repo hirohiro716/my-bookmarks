@@ -120,6 +120,40 @@ switch ($mode) {
         }
         echo JSON::fromArray($result);
         exit();
+    case "import_from_json":
+        // Valid token
+        if ($session->isValidToken($post->get("token")) == false) {
+            header('HTTP', true, 500);
+            exit();
+        }
+        // Import from JSON
+        $result = array("successed" => false);
+        try {
+            $database = new Database();
+            $database->connect();
+            $database->beginTransaction();
+            $json = new JSON($post->get("json"));
+            foreach ($json->toArray() as $element) {
+                try {
+                    $bookmark = new Bookmark($database);
+                    $record = $bookmark->getRecord();
+                    $record->put(Column::const(Column::URL), $element["a_href"]);
+                    $record->put(Column::const(Column::NAME), $element["a_text"]);
+                    $record->put(Column::const(Column::LABELING), $element["h3_text"]);
+                    $bookmark->setIconOfDirectlyBelow();
+                    $bookmark->validate();
+                    $bookmark->normalize();
+                    $bookmark->insert();
+                } catch (PropertyValidationException $exception) {
+                }
+            }
+            $database->commit();
+            $result["successed"] = true;
+        } catch (Exception $exception) {
+            $result["message"] = $exception->getMessage();
+        }
+        echo JSON::fromArray($result);
+        exit();
 }
 // Create token
 $page->assign("token", $session->createToken());
@@ -132,14 +166,14 @@ if ($keyword->length() > 0) {
     $page->assign("keyword", $keyword->get());
     foreach (Column::values() as $column) {
         switch ($column) {
-            case Column::const(Column::URL);
-            case Column::const(Column::NAME);
-            case Column::const(Column::ICON_URL);
-            case Column::const(Column::LABELING);
-            $whereSet = new WhereSet();
-            $whereSet->addLike("LOWER(" . $column . ")", "%" . $keyword->toLower() . "%");
-            $whereSetArray[] = $whereSet;
-            break;
+            case Column::const(Column::URL):
+            case Column::const(Column::NAME):
+            case Column::const(Column::ICON_URL):
+            case Column::const(Column::LABELING):
+                $whereSet = new WhereSet();
+                $whereSet->addLike("LOWER(" . $column . ")", "%" . $keyword->toLower() . "%");
+                $whereSetArray[] = $whereSet;
+                break;
         }
     }
 }
