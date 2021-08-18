@@ -200,7 +200,7 @@ function setEventHandler(url, token, idToScroll) {
         };
         // Create JSON
         let html = $('#import_section textarea').val();
-        if (typeof html === 'undefined' || html.length == 0) {
+        if (html.length == 0) {
             return;
         }
         let elements = $.parseHTML(html);
