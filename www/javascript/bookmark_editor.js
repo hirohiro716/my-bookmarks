@@ -198,10 +198,13 @@ function setEventHandler(url, token, idToScroll) {
                 waitCircle.hide();
             }
         };
-        setDisableImportSection(true);
         // Create JSON
         let html = $('#import_section textarea').val();
+        if (typeof html === 'undefined' || html.length == 0) {
+            return;
+        }
         let elements = $.parseHTML(html);
+        setDisableImportSection(true);
         let array = [];
         $(elements).find('a').each(function(index, current) {
             let object = {};
