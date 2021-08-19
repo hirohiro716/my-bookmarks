@@ -24,7 +24,7 @@
 <body class="<!--{$class}-->">
 
 <header>
-    <h1>My Bookmarks</h1>
+    <h1><img title="My Bookmarks" alt="My Bookmarks" src="<!--{$root}-->media/logo.svg"></h1>
 </header>
 
 <!--{block name=body}--><!--{/block}-->

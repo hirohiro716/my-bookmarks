@@ -51,10 +51,14 @@
 /*
  * Anchor style.
  */
-.SettingIndexPage form p a {
+.SettingIndexPage form p span.anchors {
     width: 100%;
     display: inline-block;
     text-align: left;
+}
+
+.SettingIndexPage form p span.anchors a {
+    margin-right: 0.2em;
 }
 
 /*

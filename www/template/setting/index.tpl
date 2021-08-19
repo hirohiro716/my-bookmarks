@@ -6,6 +6,13 @@
 
 <script type="text/javascript">
 $scent(function() {
+    $('#bookmarklet_popup').on('click', function() {
+        $('textarea#bookmarklet').load('<!--{$root}-->setting/bookmarklet_popup.php', function() {
+            let textArea = $('textarea#bookmarklet');
+            textArea.text(encodeURI(textArea.text().split('  ').join('')));
+            prompt('作成したスクリプト', textArea.text());
+        });
+    });
     $('#bookmarklet_add').on('click', function() {
         $('textarea#bookmarklet').load('<!--{$root}-->setting/bookmarklet_add.php', function() {
             let textArea = $('textarea#bookmarklet');
@@ -60,7 +67,10 @@ $scent(function() {
             <label>
                 ブックマークレット
             </label>
-            <a href="javascript:;" id="bookmarklet_add">ブックマーク追加用</a>
+            <span class="anchors">
+                <a href="javascript:;" id="bookmarklet_popup">ポップアップ表示用</a>
+                <a href="javascript:;" id="bookmarklet_add">追加用</a>
+            </span>
             <textarea id="bookmarklet" style="display:none;">
             </textarea>
         </p>

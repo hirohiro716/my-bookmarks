@@ -1,0 +1,104 @@
+@charset "UTF-8";
+
+/********************
+ * CSS for HTML.
+ ********************/
+
+/*
+ * All elements style.
+ */
+* {
+    box-sizing: border-box;
+	margin: 0;
+    padding: 0;
+    color: #333;
+    font-weight: normal;
+    font-size: 16px;
+    list-style-type: none;
+}
+
+/*
+ * Popup style.
+ */
+section {
+    padding: 1em;
+}
+
+/*
+ * H1 style.
+ */
+h1 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3em;
+    z-index: 99999;
+    padding: 0.6em 0.3em;
+    background-color: #fff;
+    text-align: left;
+    font-size: 2em;
+}
+
+h1 img {
+    height: 100%;
+    max-width: 100%;
+}
+
+/*
+ * Bookmarks section style.
+ */
+section#bookmarks {
+    display: block;
+    margin-top: 6em;
+}
+
+/*
+ * Group style.
+ */
+div.group {
+    
+}
+
+/*
+ * Anchor style.
+ */
+a {
+    padding: 1em 0;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: all 0.1s ease-in-out;
+}
+
+a:hover {
+    opacity: 0.7;
+}
+
+a:active {
+    transform: translateX(0.5em);
+}
+
+a img {
+    width: 1.5em;
+    height: 1.5em;
+    margin-right: 0.5em;
+}
+
+/*
+ * Grouped Bookmark style.
+ */
+div.group a.bookmark {
+    display: none;
+    padding-left: 1em;
+}
+
+/*
+ * Bookmark style.
+ */
+a.bookmark {
+}
+

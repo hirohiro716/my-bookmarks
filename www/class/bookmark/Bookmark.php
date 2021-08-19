@@ -136,8 +136,8 @@ class Bookmark extends AbstractRecordMapper
                     $url = new StringObject($this->getRecord()->get(Column::const(Column::URL)));
                     if ($url->indexOf("javascript:") == 0) {
                         $value = new StringObject($this->getRecord()->get($column));
-                        if ($value->subString(0, 1)->equals("/") && $value->indexOf("media/favicon.svg") > 0) {
-                            $value = $value->replace("favicon.svg", "script.svg");
+                        if ($value->subString(0, 1)->equals("/") && $value->indexOf("media/internet.svg") > 0) {
+                            $value = $value->replace("internet.svg", "script.svg");
                         }
                         $this->getRecord()->put($column, $value->get());
                     }
