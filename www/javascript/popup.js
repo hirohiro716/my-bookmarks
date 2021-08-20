@@ -5,7 +5,10 @@ function setEventHandler() {
     // Lazy loading of icons
     $('img.icon').each(function(index, current) {
         let img = $(current);
-        img.attr('src', img.attr('data-src'));
+        let src = img.attr('data-src');
+        if (typeof src !== 'undefined') {
+            img.attr('src', img.attr('data-src'));
+        }
     });
     // Label click event
     $('a.label').on('click', function(event) {

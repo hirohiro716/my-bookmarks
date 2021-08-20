@@ -40,7 +40,11 @@ $(window).bind('load', function() {
                 <!--{assign var="key_url" value="url"}-->
                 <a class="bookmark" id="<!--{$bookmark.$key_id}-->" url="<!--{$bookmark.$key_url}-->">
                     <!--{assign var="key" value="icon_url"}-->
-                    <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
+                    <!--{if $bookmark.$key|substr:0:1 == "/"}-->
+                        <img class="icon" src="<!--{$bookmark.$key}-->">
+                    <!--{else}-->
+                        <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
+                    <!--{/if}-->
                     <span class="name">
                         <!--{assign var="key" value="name"}-->
                         <!--{$bookmark.$key}-->
