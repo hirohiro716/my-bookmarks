@@ -31,7 +31,8 @@ if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
 }
 if (Authenticator::isAuthenticated() != true) {
     $url = new StringObject($_SERVER["SCRIPT_NAME"]);
-    $page->redirect($url->replace("export/index.php", "auth.php"));
+    $referer = "export/index.php";
+    $page->redirect($url->replace($referer, "auth.php") . "?referer=" . $referer);
     exit();
 }
 // Fetch records

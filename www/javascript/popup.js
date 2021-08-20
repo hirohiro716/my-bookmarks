@@ -5,7 +5,7 @@ function setEventHandler() {
     // Label click event
     $('a.label').on('click', function(event) {
         let label = $(this);
-        label.parent().find('.bookmark').each(function(index, current) {
+        label.parent().find('a.bookmark').each(function(index, current) {
             let bookmark = $(current);
             bookmark.css('progress', '0');
             if (bookmark.css('display') == 'none') {
@@ -27,13 +27,24 @@ function setEventHandler() {
         });
     });
     // Bookmark click event
-    $('a.bookmark').on('click', function(event) {
-        let bookmark = $(this);
-        let url = bookmark.attr('url');
-        if (window.opener == null) {
-            window.location.href = url;
-        } else {
-            window.opener.postMessage(url, '*');
+    $('img.icon, span.name').on('click', function(event) {
+        let bookmark = $(this).parent();
+        let values = {};
+        values.mode = 'move';
+        values.url = bookmark.attr('url');
+        if (window.opener != null) {
+            window.opener.postMessage(values, '*');
         }
+    });
+    // Bookmark edit event
+    $('img.edit').on('click', function(event) {
+        let bookmark = $(this).parent();
+        let values = {};
+        values.mode = 'edit';
+        values.id = bookmark.attr('id');
+        if (window.opener != null) {
+            window.opener.postMessage(values, '*');
+        }
+        return false;
     });
 }

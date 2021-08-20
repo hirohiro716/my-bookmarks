@@ -16,6 +16,14 @@
     list-style-type: none;
 }
 
+html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+}
+
 /*
  * Animation style.
  */
@@ -28,14 +36,26 @@
     }
 }
 
-html {
-    height: 100%;
+/*
+ * Scrollbar style.
+ */
+::-webkit-scrollbar {
+    width: 0.5em;
 }
 
-body {
-    height: 100%;
+::-webkit-scrollbar-track {
+    background: #f8f8f8;
+    border-radius: 0.2em;
 }
 
+::-webkit-scrollbar-thumb {
+    background: #2a7fff;
+    border-radius: 0.2em;
+}
+
+/*
+ * H1 style.
+ */
 h1 {
     font-size: 3em;
 }
@@ -44,10 +64,16 @@ h1 img {
     height: 1em;
 }
 
+/*
+ * H2 style.
+ */
 h2 {
     font-size: 1.8em;
 }
 
+/*
+ * Anchor style.
+ */
 a:link {
     color: #036eb8;
 }

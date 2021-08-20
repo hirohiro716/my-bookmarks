@@ -11,7 +11,7 @@ $scent(function() {
         button.prop('disabled', true);
         $scent.postForm($('form'), function(result) {
             if (result.successed) {
-                window.location.href = '<!--{$root}-->';
+                window.location.href = '<!--{$root}-->' + result.referer;
             } else {
                 alert('認証できませんでした。');
             }

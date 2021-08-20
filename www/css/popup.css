@@ -18,6 +18,23 @@
 }
 
 /*
+ * Scrollbar style.
+ */
+::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+::-webkit-scrollbar-track {
+    background: #f8f8f8;
+    border-radius: 0.2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2a7fff;
+    border-radius: 0.2em;
+}
+
+/*
  * Popup style.
  */
 section {
@@ -54,13 +71,6 @@ section#bookmarks {
 }
 
 /*
- * Group style.
- */
-div.group {
-    
-}
-
-/*
  * Anchor style.
  */
 a {
@@ -69,7 +79,6 @@ a {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    white-space: nowrap;
     cursor: pointer;
     transition: all 0.1s ease-in-out;
 }
@@ -82,10 +91,33 @@ a:active {
     transform: translateX(0.5em);
 }
 
-a img {
+/*
+ * Icon style.
+ */
+a img.icon {
     width: 1.5em;
     height: 1.5em;
     margin-right: 0.5em;
+}
+
+/*
+ * Bookmark name style.
+ */
+a span.name {
+    width: calc(100% - 4em);
+    margin-right: 0.5em;
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/*
+ * Edit button style.
+ */
+a img.edit {
+    width: 1em;
+    height: 1em;
+    opacity: 0.5;
 }
 
 /*
@@ -95,10 +127,3 @@ div.group a.bookmark {
     display: none;
     padding-left: 1em;
 }
-
-/*
- * Bookmark style.
- */
-a.bookmark {
-}
-

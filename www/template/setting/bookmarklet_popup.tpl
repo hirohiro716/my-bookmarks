@@ -4,7 +4,14 @@ window.addEventListener("message", function(event) {
     if (event.origin !== "<!--{$protocol}--><!--{$server}-->") {
         return;
     }
-    let url = event.data;
-    window.location.href = url;
+    let values = event.data;
+    switch (values.mode) {
+    case "move":
+        window.location.href = values.url;
+        break;
+    case "edit":
+        window.location.href = "<!--{$protocol}--><!--{$server}--><!--{$root}-->?scroll=" + values.id;
+        break;
+    }
     popupWindow.close();
 }, false);

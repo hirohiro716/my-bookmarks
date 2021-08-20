@@ -28,12 +28,15 @@ if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
     echo "Your connection is not secure.";
     exit();
 }
-// Processing of each mode
+// Referer
 $request = $page->getRequestValues();
+$referer = new StringObject($request->get("referer"));
+// Processing of each mode
 $mode = new StringObject($request->get("mode"));
 switch ($mode) {
     case "auth":
         $result = array("successed" => false);
+        $result["referer"] = $referer->get();
         $password = $page->getPostValue("password");
         try {
             $database = new Database();
@@ -49,8 +52,8 @@ switch ($mode) {
     case "logout":
         Authenticator::logout();
         $url = new StringObject($_SERVER["SCRIPT_NAME"]);
-        $page->redirect($url->replace("auth.php", "index.php"));
-        break;
+        $page->redirect($url->get());
+        exit();
 }
 $page->display();
 
