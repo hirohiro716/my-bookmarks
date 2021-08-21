@@ -121,6 +121,26 @@ switch ($mode) {
         }
         echo JSON::fromArray($result);
         exit();
+    case "renumber_of_sort":
+        // Valid token
+        if ($session->isValidToken($post->get("token")) == false) {
+            header('HTTP', true, 500);
+            exit();
+        }
+        // 
+        $result = array("successed" => false);
+        try {
+            $database = new Database();
+            $database->connect();
+            $database->beginTransaction();
+            Bookmark::renumberOfSort($database);
+            $database->commit();
+            $result["successed"] = true;
+        } catch (Exception $exception) {
+            $result["message"] = $exception->getMessage();
+        }
+        echo JSON::fromArray($result);
+        exit();
     case "import_from_json":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {

@@ -29,6 +29,37 @@ function setEventHandler(url, token, idToScroll) {
         }
     });
     /*
+     * Sub menu
+     */
+    let subMenu = $('<div></div>');
+    subMenu.css('position', 'fixed');
+    subMenu.css('width', '15em');
+    subMenu.css('background-color', 'rgba(0,0,0,0.6)');
+    subMenu.css('border-radius', '0.7em');
+    subMenu.hide();
+    $('body').append(subMenu);
+    $('a#submenu').on('click', function() {
+        subMenu.css('top', event.pageY + 'px');
+        subMenu.css('left', (event.pageX - subMenu.width()) + 'px');
+        subMenu.slideToggle(100);
+    });
+    function addSubMenuItem(name, functionOfSubMenuItem) {
+        let item = $('<a href="javascript:;"></a>');
+        item.css('padding', '1em');
+        item.css('display', 'block');
+        if (subMenu.children().length > 0) {
+            item.css('border-top', '1px solid #fff');
+        }
+        item.css('color', '#fff');
+        item.css('text-decoration', 'none');
+        item.text(name);
+        item.bind('click', function(event) {
+            subMenu.slideToggle(100);
+        });
+        item.bind('click', functionOfSubMenuItem);
+        subMenu.append(item);
+    }
+    /*
      * Jump to URL
      */
     $('#rows .row .left a').on('click', function() {
@@ -173,9 +204,29 @@ function setEventHandler(url, token, idToScroll) {
         });
     });
     /*
-     * Import button
+     * Sort number reset
      */
-    $('button:contains("HTMLからインポート")').on('click', function(event) {
+    addSubMenuItem('並び順を再設定', function() {
+        if (confirm("現在の並び順を維持したまま並び順の番号を再設定しますか？") == false) {
+            return;
+        }
+        let values = {};
+        values['token'] = token;
+        values['mode'] = 'renumber_of_sort';
+        $scent.post(values, url, function(result) {
+            if (result['successed']) {
+                location.reload();
+            } else {
+                alert(result['message']);
+            }
+        }, function(result) {
+            alert('通信に失敗しました。');
+        });
+    });
+    /*
+     * Import from HTML
+     */
+    addSubMenuItem('HTMLからインポート', function() {
         $('#import_section').show();
     });
     $('#import_section button:contains("キャンセル")').on('click', function(event) {
@@ -245,3 +296,5 @@ function setEventHandler(url, token, idToScroll) {
         }
     }
 }
+
+

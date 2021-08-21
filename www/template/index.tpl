@@ -11,9 +11,6 @@ $scent(function() {
         idToScroll = 'new_row';
     <!--{/if}-->
     setEventHandler('<!--{$root}-->', '<!--{$token}-->', idToScroll);
-    
-    
-    
 });
 </script>
 <!--{/block}-->
@@ -27,11 +24,14 @@ $scent(function() {
     <section id="menu">
         <!--{assign var="key" value="keyword"}-->
         <input type="text" id="<!--{$key}-->" name="<!--{$key}-->" value="<!--{$keyword|escape}-->" style="display:none;">
-        <a id="search">
+        <a id="search" href="javascript:;">
             <img title="検索" alt="検索" src="<!--{$root}-->media/search.svg">
         </a>
         <a href="<!--{$root}-->setting/">
             <img title="設定" alt="設定" src="<!--{$root}-->media/setting.svg">
+        </a>
+        <a id="submenu" href="javascript:;">
+            <img title="サブメニュー" alt="サブメニュー" src="<!--{$root}-->media/submenu.svg">
         </a>
         <a href="<!--{$root}-->auth.php?mode=logout">
             <img title="ログアウト" alt="ログアウト" src="<!--{$root}-->media/logout.svg">
@@ -119,7 +119,6 @@ $scent(function() {
     </section>
     <section>
         <button type="button">追加</button>
-        <button type="button">HTMLからインポート</button>
     </section>
     <section id="import_section" style="display:none;">
         <label>HTMLソースからインポート</label>

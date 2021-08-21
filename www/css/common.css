@@ -76,6 +76,7 @@ h2 {
  */
 a:link {
     color: #036eb8;
+    transition: opacity 0.3s ease-in-out;
 }
 
 a:visited {

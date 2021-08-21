@@ -15,6 +15,7 @@ use hirohiro716\MyBookmarks\Setting\Setting;
 use hirohiro716\MyBookmarks\Setting\SettingProperty as Property;
 use hirohiro716\Scent\Helper;
 use hirohiro716\Scent\ArrayHelper;
+use hirohiro716\MyBookmarks\Database\Database;
 
 /**
  * ブックマーク情報をデータベースに入出力するクラス。
@@ -33,28 +34,32 @@ class Bookmark extends AbstractRecordMapper
     {
         return Column::columns();
     }
+    
+    private const SORT_NUMBER_STEP = 100;
 
     public function createDefaultRecord(): Hash
     {
         $hash = new Hash();
         try {
             $database = $this->getDatabase();
-            // icon URL
-            $hash->put(Column::const(Column::ICON_URL), Setting::fetchValueStatic(Property::const(Property::ROOT_URL), $database) . "media/internet.svg");
-            // Sort number
-            $sql = new StringObject("SELECT MAX(");
-            $sql->append(Column::const(Column::SORT_NUMBER));
-            $sql->append(") FROM ");
-            $sql->append($this->getTableName());
-            $sql->append(";");
-            $maximumSortNumber = new StringObject($database->fetchOne($sql));
-            if (Helper::isNull($maximumSortNumber->toInteger())) {
-                $maximumSortNumber->set(0);
+            if (Helper::isNull($database) == false) {
+                // icon URL
+                $hash->put(Column::const(Column::ICON_URL), Setting::fetchValueStatic(Property::const(Property::ROOT_URL), $database) . "media/internet.svg");
+                // Sort number
+                $sql = new StringObject("SELECT MAX(");
+                $sql->append(Column::const(Column::SORT_NUMBER));
+                $sql->append(") FROM ");
+                $sql->append($this->getTableName());
+                $sql->append(";");
+                $maximumSortNumber = new StringObject($database->fetchOne($sql));
+                if (Helper::isNull($maximumSortNumber->toInteger())) {
+                    $maximumSortNumber->set(0);
+                }
+                $newSortNumber = new StringObject($maximumSortNumber->toInteger() + self::SORT_NUMBER_STEP);
+                $newSortNumber = $newSortNumber->subString(0, -2);
+                $newSortNumber->append("00");
+                $hash->put(Column::const(Column::SORT_NUMBER), $newSortNumber->toInteger());
             }
-            $newSortNumber = new StringObject($maximumSortNumber->toInteger() + 100);
-            $newSortNumber = $newSortNumber->subString(0, -2);
-            $newSortNumber->append("00");
-            $hash->put(Column::const(Column::SORT_NUMBER), $newSortNumber->toInteger());
         } catch (Exception $exception) {
         }
         return $hash;
@@ -152,6 +157,39 @@ class Bookmark extends AbstractRecordMapper
                 case Column::const(Column::LABELING):
                     break;
             }
+        }
+    }
+    
+    /**
+     * 現在の並び順を維持したまま並び順の番号を再設定する。
+     *
+     * @param Database $database 接続済みDatabaseインスタンス
+     */
+    public static function renumberOfSort(Database $database): void
+    {
+        $sql = new StringObject("SELECT * FROM ");
+        $sql->append(self::getTableNameStatic());
+        $sql->append(" ORDER BY ");
+        $sql->append(Column::const(Column::SORT_NUMBER));
+        $sql->append(", ");
+        $sql->append(Column::const(Column::ID));
+        $sql->append(";");
+        $records = $database->fetchRecords($sql);
+        $sortNumber = self::SORT_NUMBER_STEP;
+        foreach ($records as $record) {
+            $sqlForUpdate = new StringObject("UPDATE ");
+            $sqlForUpdate->append(self::getTableNameStatic());
+            $sqlForUpdate->append(" SET ");
+            $sqlForUpdate->append(Column::const(Column::SORT_NUMBER));
+            $sqlForUpdate->append(" = ");
+            $sqlForUpdate->append($sortNumber);
+            $sqlForUpdate->append(" WHERE ");
+            $sqlForUpdate->append(Column::const(Column::ID));
+            $sqlForUpdate->append(" = ");
+            $sqlForUpdate->append($record->get(Column::const(Column::ID)));
+            $sqlForUpdate->append(";");
+            $database->execute($sqlForUpdate);
+            $sortNumber += self::SORT_NUMBER_STEP;
         }
     }
     
