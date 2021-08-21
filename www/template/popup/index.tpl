@@ -24,6 +24,9 @@ $(window).bind('load', function() {
 </head>
 
 <body>
+    <section id="wait_circle">
+        <img src="<!--{$root}-->media/wait_circle.svg">
+    </section>
     <h1><img title="My Bookmarks" alt="My Bookmarks" src="<!--{$root}-->media/logo.svg"></h1>
     <section id="bookmarks">
         <!--{foreach from=$label_and_bookmarks key=labeling item=bookmarks}-->
@@ -32,25 +35,29 @@ $(window).bind('load', function() {
                 <div class="group">
                     <a class="label">
                         <img class="icon" src="<!--{$root}-->media/directory.svg">
-                        <!--{$labeling}-->
+                        <span class="name">
+                            <!--{$labeling}-->
+                        </span>
                     </a>
             <!--{/if}-->
             <!--{foreach from=$bookmarks item=bookmark}-->
-                <!--{assign var="key_id" value="id"}-->
-                <!--{assign var="key_url" value="url"}-->
-                <a class="bookmark" id="<!--{$bookmark.$key_id}-->" url="<!--{$bookmark.$key_url}-->">
-                    <!--{assign var="key" value="icon_url"}-->
-                    <!--{if $bookmark.$key|substr:0:1 == "/"}-->
-                        <img class="icon" src="<!--{$bookmark.$key}-->">
-                    <!--{else}-->
-                        <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
-                    <!--{/if}-->
-                    <span class="name">
-                        <!--{assign var="key" value="name"}-->
-                        <!--{$bookmark.$key}-->
-                    </span>
+                <!--{assign var="key" value="id"}-->
+                <div id="<!--{$bookmark.$key}-->" class="bookmark">
+                    <!--{assign var="key" value="url"}-->
+                    <a url="<!--{$bookmark.$key}-->">
+                        <!--{assign var="key" value="icon_url"}-->
+                        <!--{if $bookmark.$key|substr:0:1 == "/"}-->
+                            <img class="icon" src="<!--{$bookmark.$key}-->">
+                        <!--{else}-->
+                            <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
+                        <!--{/if}-->
+                        <span class="name">
+                            <!--{assign var="key" value="name"}-->
+                            <!--{$bookmark.$key}-->
+                        </span>
+                    </a>
                     <img class="edit" src="<!--{$root}-->media/edit.svg">
-                </a>
+                </div>
             <!--{/foreach}-->
             <!--{if $isLabeling}-->
                 </div>

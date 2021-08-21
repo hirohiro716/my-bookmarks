@@ -25,18 +25,6 @@ body {
 }
 
 /*
- * Animation style.
- */
-@keyframes rotate {
-    0% {
-        transform: rotate(0);
-    }
-    100% {
-        transform: rotate(360deg);
-    }
-}
-
-/*
  * Scrollbar style.
  */
 ::-webkit-scrollbar {
@@ -131,6 +119,15 @@ textarea {
 /*
  * Wait circle style.
  */
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
 img[src$="media/wait_circle.svg"] {
     animation: rotate 2.5s linear infinite;
 }

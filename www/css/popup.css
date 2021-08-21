@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 /********************
- * CSS for HTML.
+ * CSS for popup.
  ********************/
 
 /*
@@ -35,10 +35,35 @@
 }
 
 /*
- * Popup style.
+ * Wait circle style.
  */
-section {
-    padding: 1em;
+section#wait_circle {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    background-color: #fff;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+section#wait_circle img {
+    position: absolute;
+    top: calc(50% - 50px);
+    left: calc(50% - 50px);
+    width: 100px;
+    height: 100px;
+    display: block;
+    animation: rotate 2.5s linear infinite;
 }
 
 /*
@@ -50,7 +75,7 @@ h1 {
     left: 0;
     width: 100%;
     height: 3em;
-    z-index: 99999;
+    z-index: 999;
     padding: 0.6em 0.3em;
     background-color: #fff;
     text-align: left;
@@ -68,10 +93,11 @@ h1 img {
 section#bookmarks {
     display: block;
     margin-top: 6em;
+    padding: 1em;
 }
 
 /*
- * Anchor style.
+ * Common anchor style.
  */
 a {
     padding: 1em 0;
@@ -92,38 +118,77 @@ a:active {
 }
 
 /*
- * Icon style.
+ * Common icon style.
  */
-a img.icon {
+div a img.icon {
     width: 1.5em;
     height: 1.5em;
     margin-right: 0.5em;
 }
 
 /*
+ * Bookmark div style.
+ */
+div.bookmark {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+/*
+ * Bookmark anchor style.
+ */
+div.bookmark a {
+    width: calc(100% - 2em);
+    margin-right: 1em;
+}
+
+/*
  * Bookmark name style.
  */
-a span.name {
-    width: calc(100% - 4em);
-    margin-right: 0.5em;
+div.bookmark a span.name {
+    width: calc(100% - 2em);
     display: inline-block;
     white-space: nowrap;
     overflow: hidden;
 }
 
 /*
- * Edit button style.
+ * Bookmark edit button style.
  */
-a img.edit {
+div.bookmark img.edit {
     width: 1em;
     height: 1em;
     opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+div.bookmark img.edit:hover {
+    opacity: 1;
 }
 
 /*
- * Grouped Bookmark style.
+ * Group label style.
  */
-div.group a.bookmark {
-    display: none;
+div.group a.label {
+    width: 100%;
+}
+
+/*
+ * Group label name style.
+ */
+div.group a.label span.name {
+    width: calc(100% - 2em);
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/*
+ * Grouped bookmark anchor style.
+ */
+div.group div.bookmark a {
     padding-left: 1em;
 }

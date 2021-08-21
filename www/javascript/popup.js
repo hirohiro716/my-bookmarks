@@ -11,9 +11,10 @@ function setEventHandler() {
         }
     });
     // Label click event
+    $('div.group div.bookmark').hide();
     $('a.label').on('click', function(event) {
         let label = $(this);
-        label.parent().find('a.bookmark').each(function(index, current) {
+        label.parent().find('div.bookmark').each(function(index, current) {
             let bookmark = $(current);
             bookmark.css('progress', '0');
             if (bookmark.css('display') == 'none') {
@@ -35,8 +36,8 @@ function setEventHandler() {
         });
     });
     // Bookmark click event
-    $('img.icon, span.name').on('click', function(event) {
-        let bookmark = $(this).parent();
+    $('div.bookmark a').on('click', function(event) {
+        let bookmark = $(this);
         let values = {};
         values.mode = 'move';
         values.url = bookmark.attr('url');
@@ -55,4 +56,6 @@ function setEventHandler() {
         }
         return false;
     });
+    // Hide wait circle
+    $('section#wait_circle').fadeOut(200);
 }
