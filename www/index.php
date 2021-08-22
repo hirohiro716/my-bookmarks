@@ -204,9 +204,9 @@ $bookmark = new Bookmark($database);
 $records = $bookmark->search($whereSetArray, "", "ORDER BY " . Column::const(Column::SORT_NUMBER));
 $labelAndBookmarks = array();
 foreach ($records as $record) {
-    $bookmark = $record->getArray();
+    $array = $record->getArray();
     $labeling = new StringObject($record->get(Column::const(Column::LABELING)));
-    $labelAndBookmarks[$labeling->get()][] = $bookmark;
+    $labelAndBookmarks[$labeling->get()][] = $array;
 }
 $page->assign("label_and_bookmarks", $labelAndBookmarks);
 // Initial value sent by GET
