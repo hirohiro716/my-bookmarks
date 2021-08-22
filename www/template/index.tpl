@@ -38,47 +38,56 @@ $scent(function() {
         </a>
     </section>
     <section id="rows">
-        <!--{if $records->size() > 0}-->
-            <!--{foreach from=$records->toArray() item=record}-->
-                <div class="row">
-                    <div class="left">
-                        <p>
-                            <!--{assign var="key" value="id"}-->
-                            <a id="<!--{$record.$key}-->"></a>
-                            <input type="hidden" name="<!--{$key}-->" value="<!--{$record.$key}-->">
-                            <!--{assign var="key" value="icon_url"}-->
-                            <img class="icon" src="<!--{$record.$key}-->">
-                            <input type="hidden" name="<!--{$key}-->" value="<!--{$record.$key}-->" original_value="<!--{$record.$key|escape}-->">
-                            <!--{assign var="key" value="name"}-->
-                            <input type="text" name="<!--{$key}-->" value="<!--{$record.$key|escape}-->" original_value="<!--{$record.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
-                        </p>
-                        <p>
-                            <!--{assign var="key" value="url"}-->
-                            <a href="javascript:;">
-                                <label for="<!--{$key}-->">URL:</label>
+        <!--{if $label_and_bookmarks|count > 0}-->
+            <!--{assign var="all_labeling" value=$label_and_bookmarks|array_keys}-->
+            <!--{foreach from=$label_and_bookmarks key=labeling item=bookmarks}-->
+                <!--{foreach from=$bookmarks item=bookmark}-->
+                    <div class="row">
+                        <div class="left">
+                            <p>
+                                <!--{assign var="key" value="id"}-->
+                                <a id="<!--{$bookmark.$key}-->"></a>
+                                <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->">
+                                <!--{assign var="key" value="icon_url"}-->
+                                <img class="icon" src="<!--{$bookmark.$key}-->">
+                                <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key|escape}-->">
+                                <!--{assign var="key" value="name"}-->
+                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
+                            </p>
+                            <p>
+                                <!--{assign var="key" value="url"}-->
+                                <a href="javascript:;">
+                                    <label for="<!--{$key}-->">URL:</label>
+                                </a>
+                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                            </p>
+                            <p>
+                                <!--{assign var="key" value="labeling"}-->
+                                <label for="<!--{$key}-->">ラベル:</label>
+                                <select name="<!--{$key}-->" original_value="<!--{$bookmark.$key|escape}-->" style="width:calc(100% - 8em);">
+                                    <!--{if $all_labeling[0]|strlen > 0}-->
+                                        <option value=""></option>
+                                    <!--{/if}-->
+                                    <!--{html_options values=$all_labeling output=$all_labeling selected=$bookmark.$key}-->
+                                    <option value="{new_labeling}">[新しいラベルを入力]</option>
+                                </select>
+                            </p>
+                            <p>
+                                <!--{assign var="key" value="sort_number"}-->
+                                <label for="<!--{$key}-->">並び順:</label>
+                                <input type="number" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" style="width:5em;">
+                            </p>
+                        </div>
+                        <div class="right">
+                            <a class="delete" href="javascript:;">
+                                <img title="削除" alt="削除" src="<!--{$root}-->media/delete.svg">
                             </a>
-                            <input type="text" name="<!--{$key}-->" value="<!--{$record.$key|escape}-->" original_value="<!--{$record.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
-                        </p>
-                        <p>
-                            <!--{assign var="key" value="labeling"}-->
-                            <label for="<!--{$key}-->">ラベル:</label>
-                            <input type="text" name="<!--{$key}-->" value="<!--{$record.$key|escape}-->" original_value="<!--{$record.$key|escape}-->" style="width:calc(100% - 8em);">
-                        </p>
-                        <p>
-                            <!--{assign var="key" value="sort_number"}-->
-                            <label for="<!--{$key}-->">並び順:</label>
-                            <input type="number" name="<!--{$key}-->" value="<!--{$record.$key|escape}-->" original_value="<!--{$record.$key|escape}-->" style="width:5em;">
-                        </p>
+                            <a class="save" href="javascript:;" disabled="disabled">
+                                <img title="保存" alt="保存" src="<!--{$root}-->media/save.svg">
+                            </a>
+                        </div>
                     </div>
-                    <div class="right">
-                        <a class="delete" href="javascript:;">
-                            <img title="削除" alt="削除" src="<!--{$root}-->media/delete.svg">
-                        </a>
-                        <a class="save" href="javascript:;" disabled="disabled">
-                            <img title="保存" alt="保存" src="<!--{$root}-->media/save.svg">
-                        </a>
-                    </div>
-                </div>
+                <!--{/foreach}-->
             <!--{/foreach}-->
         <!--{elseif !$sent_values_by_get}-->
             <p id="nothing">
@@ -102,7 +111,13 @@ $scent(function() {
                 <p>
                     <!--{assign var="key" value="labeling"}-->
                     <label for="<!--{$key}-->">ラベル:</label>
-                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" style="width:calc(100% - 8em);">
+                    <select name="<!--{$key}-->" style="width:calc(100% - 8em);">
+                        <!--{if $all_labeling[0]|strlen > 0}-->
+                            <option value=""></option>
+                        <!--{/if}-->
+                        <!--{html_options values=$all_labeling output=$all_labeling selected=$sent_values_by_get.$key}-->
+                        <option value="{new_labeling}">[新しいラベルを入力]</option>
+                    </select>
                 </p>
                 <p>
                     <!--{assign var="key" value="sort_number"}-->

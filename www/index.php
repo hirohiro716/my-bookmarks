@@ -127,7 +127,7 @@ switch ($mode) {
             header('HTTP', true, 500);
             exit();
         }
-        // 
+        // Renumber of sort
         $result = array("successed" => false);
         try {
             $database = new Database();
@@ -202,7 +202,13 @@ $database = new Database();
 $database->connect();
 $bookmark = new Bookmark($database);
 $records = $bookmark->search($whereSetArray, "", "ORDER BY " . Column::const(Column::SORT_NUMBER));
-$page->assign("records", $records);
+$labelAndBookmarks = array();
+foreach ($records as $record) {
+    $bookmark = $record->getArray();
+    $labeling = new StringObject($record->get(Column::const(Column::LABELING)));
+    $labelAndBookmarks[$labeling->get()][] = $bookmark;
+}
+$page->assign("label_and_bookmarks", $labelAndBookmarks);
 // Initial value sent by GET
 $isSentInitialValueByGET = false;
 foreach (Column::columns() as $column) {

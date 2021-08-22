@@ -19,9 +19,6 @@ function setEventHandler(url, token, idToScroll) {
             input.fadeOut(200);
         }
     });
-    /*
-     * Search
-     */
     $('input#keyword').on('keyup', function(event) {
         if (event.keyCode == 13) {
             let input = $(this);
@@ -60,32 +57,26 @@ function setEventHandler(url, token, idToScroll) {
         subMenu.append(item);
     }
     /*
-     * Jump to URL
-     */
-    $('#rows .row .left a').on('click', function() {
-        let url = $(this).parent().find('input').val()
-        window.open(url);
-    });
-    /*
      * Enable / disable the save button
      */
     let previousRow;
-    function changedInputValue(input) {
-        let isChanged = (input.val() !== input.attr('original_value'));
-        let row = input.parents('.row');
+    function changedInputValue(inputOrSelect) {
+        let isChanged = (inputOrSelect.val() !== inputOrSelect.attr('original_value'));
+        let row = inputOrSelect.parents('.row');
         if (isChanged) {
             row.find('.save').removeAttr('disabled');
             // Undo previous row
             if (typeof previousRow !== 'undefined' && previousRow.is(row) == false) {
                 if (previousRow.attr('id') == 'new_row') {
                     previousRow.fadeOut();
+                    $('button:contains("追加")').fadeIn();
                 } else {
                     previousRow.find('a.save').attr('disabled', 'disabled');
-                    previousRow.find('input').each(function(index, current) {
-                        let input = $(current);
-                        let originalValue = input.attr('original_value');
-                        input.val(originalValue);
-                        let img = input.prev('img');
+                    previousRow.find('input, select').each(function(index, current) {
+                        let inputOrSelect = $(current);
+                        let originalValue = inputOrSelect.attr('original_value');
+                        inputOrSelect.val(originalValue);
+                        let img = inputOrSelect.prev('img');
                         if (img.length > 0) {
                             img.attr('src', originalValue);
                         }
@@ -97,7 +88,7 @@ function setEventHandler(url, token, idToScroll) {
             row.find('.save').attr('disabled', 'disabled');
         }
     }
-    $('#rows input').on('change keyup', function(event) {
+    $('#rows input, #rows select').on('change keyup', function(event) {
         changedInputValue($(this));
     });
     /*
@@ -107,13 +98,38 @@ function setEventHandler(url, token, idToScroll) {
         let img = $(this);
         let originalURL = img.attr('src');
         let url = prompt('アイコンのURLを入力してください。', originalURL);
-        if (url == null || url == originalURL) {
+        if (url == null || url.length == 0 || url == originalURL) {
             return;
         }
         img.attr('src', url);
         let input = img.next();
         input.val(url);
         changedInputValue(input);
+    });
+    /*
+     * Jump to URL
+     */
+    $('a label:contains("URL:")').on('click', function() {
+        let url = $(this).parents('p').find('input').val()
+        window.open(url);
+    });
+    /*
+     * New labeling
+     */
+    $('#rows select').on('change', function(event) {
+        let select = $(this);
+        if (select.val() != '{new_labeling}') {
+            return;
+        }
+        let newLabeling = prompt('新しいラベルを入力してください。');
+        if (newLabeling == null || newLabeling.length == 0) {
+            select.val(select.attr('original_value'));
+        } else {
+            let newOption = $('<option value="' + newLabeling + '">' + newLabeling + '</option>');
+            select.append(newOption);
+            select.val(newLabeling);
+        }
+        changedInputValue(select);
     });
     /*
      * Delete button
@@ -150,8 +166,9 @@ function setEventHandler(url, token, idToScroll) {
         }
         let row = button.parents('.row');
         let values = {};
-        row.find('input').each(function(index, current) {
+        row.find('input, select').each(function(index, current) {
             let input = $(current);
+            
             values[input.attr('name')] = input.val();
         });
         values['token'] = token;
@@ -186,16 +203,15 @@ function setEventHandler(url, token, idToScroll) {
         values['token'] = token;
         $scent.post(values, url, function(result) {
             if (result['successed']) {
-                row.find('input').each(function(index, current) {
-                    let input = $(current);
-                    input.val(result['record'][input.attr('name')]);
+                row.find('input, select').each(function(index, current) {
+                    let inputOrSelect = $(current);
+                    inputOrSelect.val(result['record'][inputOrSelect.attr('name')]);
                 });
                 let img = row.find('.left').find('img');
                 img.attr('src', img.next().val());
                 button.hide();
                 $('p#nothing').hide();
                 row.fadeIn();
-                previousRow = row;
             } else {
                 alert(result['message']);
             }

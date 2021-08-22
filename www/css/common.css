@@ -296,8 +296,14 @@ footer {
     white-space: nowrap;
 }
 
-.IndexPage #rows .row .left p input {
+.IndexPage #rows .row .left p a label {
+    cursor: pointer;
+}
+
+.IndexPage #rows .row .left p input,
+.IndexPage #rows .row .left p select {
     margin: 0.1em;
+    background-color: #fff;
     border: none;
 }
 

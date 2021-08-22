@@ -175,21 +175,28 @@ class Bookmark extends AbstractRecordMapper
         $sql->append(Column::const(Column::ID));
         $sql->append(";");
         $records = $database->fetchRecords($sql);
-        $sortNumber = self::SORT_NUMBER_STEP;
+        $labelAndRecords = array();
         foreach ($records as $record) {
-            $sqlForUpdate = new StringObject("UPDATE ");
-            $sqlForUpdate->append(self::getTableNameStatic());
-            $sqlForUpdate->append(" SET ");
-            $sqlForUpdate->append(Column::const(Column::SORT_NUMBER));
-            $sqlForUpdate->append(" = ");
-            $sqlForUpdate->append($sortNumber);
-            $sqlForUpdate->append(" WHERE ");
-            $sqlForUpdate->append(Column::const(Column::ID));
-            $sqlForUpdate->append(" = ");
-            $sqlForUpdate->append($record->get(Column::const(Column::ID)));
-            $sqlForUpdate->append(";");
-            $database->execute($sqlForUpdate);
-            $sortNumber += self::SORT_NUMBER_STEP;
+            $labeling = new StringObject($record->get(Column::const(Column::LABELING)));
+            $labelAndRecords[$labeling->get()][] = $record;
+        }
+        $sortNumber = self::SORT_NUMBER_STEP;
+        foreach ($labelAndRecords as $records) {
+            foreach ($records as $record) {
+                $sqlForUpdate = new StringObject("UPDATE ");
+                $sqlForUpdate->append(self::getTableNameStatic());
+                $sqlForUpdate->append(" SET ");
+                $sqlForUpdate->append(Column::const(Column::SORT_NUMBER));
+                $sqlForUpdate->append(" = ");
+                $sqlForUpdate->append($sortNumber);
+                $sqlForUpdate->append(" WHERE ");
+                $sqlForUpdate->append(Column::const(Column::ID));
+                $sqlForUpdate->append(" = ");
+                $sqlForUpdate->append($record->get(Column::const(Column::ID)));
+                $sqlForUpdate->append(";");
+                $database->execute($sqlForUpdate);
+                $sortNumber += self::SORT_NUMBER_STEP;
+            }
         }
     }
     
