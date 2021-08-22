@@ -273,14 +273,37 @@ function setEventHandler(url, token, idToScroll) {
         let elements = $.parseHTML(html);
         setDisableImportSection(true);
         let array = [];
-        $(elements).find('a').each(function(index, current) {
-            let object = {};
-            let a = $(current);
-            object['a_href'] = a.attr('href');
-            object['a_text'] = a.text();
-            let h3 = a.parent().parents('dt').find('h3');
-            object['h3_text'] = h3.text();
-            array.push(object);
+        let firstLabeling;
+        let labeling = '';
+        let isDlEnd = false;
+        $(elements).find('h3, a, dl, dt, p').each(function(index, current) {
+            let element = $(current);
+            switch (element.prop("tagName")) {
+            case "A":
+                let object = {};
+                object['a_href'] = element.attr('href');
+                object['a_text'] = element.text();
+                object['h3_text'] = labeling;
+                array.push(object);
+                break;
+            case "H3":
+                labeling = element.text();
+                if (typeof firstLabeling === 'undefined') {
+                    firstLabeling = labeling;
+                }
+                break;
+            case "DL":
+                isDlEnd = false;
+                break;
+            case "DT":
+                isDlEnd = true;
+                break;
+            case "P":
+                if (isDlEnd) {
+                    labeling = firstLabeling;
+                }
+                break;
+            }
         });
         let json = JSON.stringify(array);
         // Send
