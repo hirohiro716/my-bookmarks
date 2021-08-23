@@ -59,7 +59,7 @@ $scent(function() {
                                 <a href="javascript:;">
                                     <label for="<!--{$key}-->">URL:</label>
                                 </a>
-                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape:"javascript"}-->" original_value="<!--{$bookmark.$key|escape:"javascript"}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                             </p>
                             <p>
                                 <!--{assign var="key" value="labeling"}-->
@@ -106,7 +106,7 @@ $scent(function() {
                 <p>
                     <!--{assign var="key" value="url"}-->
                     <label for="<!--{$key}-->">URL:</label>
-                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape:"javascript"}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="labeling"}-->
