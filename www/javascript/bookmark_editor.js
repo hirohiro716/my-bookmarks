@@ -2,6 +2,14 @@
  * Set event handler.
  */
 function setEventHandler(url, token, idToScroll) {
+    // Lazy loading of icons
+    $('img.icon').each(function(index, current) {
+        let img = $(current);
+        let src = img.attr('data-src');
+        if (typeof src !== 'undefined') {
+            img.attr('src', img.attr('data-src'));
+        }
+    });
     /*
      * Search button
      */

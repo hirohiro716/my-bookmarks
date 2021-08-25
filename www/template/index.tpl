@@ -49,7 +49,11 @@ $scent(function() {
                                 <a id="<!--{$bookmark.$key}-->"></a>
                                 <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->">
                                 <!--{assign var="key" value="icon_url"}-->
-                                <img class="icon" src="<!--{$bookmark.$key}-->">
+                                <!--{if $bookmark.$key|substr:0:1 == "/"}-->
+                                    <img class="icon" src="<!--{$bookmark.$key}-->">
+                                <!--{else}-->
+                                    <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
+                                <!--{/if}-->
                                 <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key|escape}-->">
                                 <!--{assign var="key" value="name"}-->
                                 <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
