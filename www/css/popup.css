@@ -140,7 +140,7 @@ div.bookmark {
  * Bookmark anchor style.
  */
 div.bookmark a {
-    width: calc(100% - 2em);
+    width: calc(100% - 4em);
     margin-right: 1em;
 }
 
@@ -155,6 +155,22 @@ div.bookmark a span.name {
 }
 
 /*
+ * Bookmark open in window button style.
+ */
+div.bookmark img.open_in_window {
+    width: 1em;
+    height: 1em;
+    margin-right: 1em;
+    opacity: 0.5;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+
+div.bookmark img.edit:hover {
+    opacity: 1;
+}
+
+/*
  * Bookmark edit button style.
  */
 div.bookmark img.edit {
@@ -165,7 +181,7 @@ div.bookmark img.edit {
     transition: all 0.5s ease-in-out;
 }
 
-div.bookmark img.edit:hover {
+div.bookmark img.open_in_window:hover {
     opacity: 1;
 }
 

@@ -56,6 +56,7 @@ $(window).bind('load', function() {
                             <!--{$bookmark.$key}-->
                         </span>
                     </a>
+                    <img class="open_in_window" src="<!--{$root}-->media/new_window.svg">
                     <img class="edit" src="<!--{$root}-->media/edit.svg">
                 </div>
             <!--{/foreach}-->

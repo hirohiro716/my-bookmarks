@@ -45,6 +45,15 @@ function setEventHandler() {
             window.opener.postMessage(values, '*');
         }
     });
+    // Bookmark open in window event
+    $('div.bookmark img.open_in_window').on('click', function(event) {
+        let bookmark = $(this).parent().find('a');
+        let url = bookmark.attr('url');
+        let newWindow = window.open(url);
+        setTimeout(function() {
+            window.close();
+        }, 500);
+    });
     // Bookmark edit event
     $('img.edit').on('click', function(event) {
         let bookmark = $(this).parent();
