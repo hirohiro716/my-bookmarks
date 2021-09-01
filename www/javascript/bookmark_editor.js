@@ -119,7 +119,7 @@ function setEventHandler(url, token, idToScroll) {
      */
     $('a label:contains("URL:")').on('click', function() {
         let url = $(this).parents('p').find('input').val()
-        window.open(url);
+        window.open(url, 'noopener=yes,noreferrer=yes');
     });
     /*
      * New labeling

@@ -49,7 +49,7 @@ function setEventHandler() {
     $('div.bookmark img.open_in_window').on('click', function(event) {
         let bookmark = $(this).parent().find('a');
         let url = bookmark.attr('url');
-        let newWindow = window.open(url);
+        let newWindow = window.open(url, 'noopener=yes,noreferrer=yes');
         setTimeout(function() {
             window.close();
         }, 500);

@@ -1,5 +1,5 @@
 javascript:
-popupWindow = window.open("<!--{$protocol}--><!--{$server}--><!--{$root}-->popup/", "my-bookmarks-window-for-popup", "width=500,height=700,toolbar=no,menubar=no");
+popupWindow = window.open("<!--{$protocol}--><!--{$server}--><!--{$root}-->popup/", "my-bookmarks-window-for-popup");
 window.addEventListener("message", function(event) {
     if (event.origin !== "<!--{$protocol}--><!--{$server}-->") {
         return;

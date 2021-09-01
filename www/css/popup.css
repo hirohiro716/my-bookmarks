@@ -35,6 +35,15 @@
 }
 
 /*
+ * Body style.
+ */
+body {
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 10px 0px 5px #ccc;
+}
+
+/*
  * Wait circle style.
  */
 section#wait_circle {
@@ -74,6 +83,7 @@ h1 {
     top: 0;
     left: 0;
     width: 100%;
+    max-width: 600px;
     height: 3em;
     z-index: 999;
     padding: 0.6em 0.3em;
@@ -91,9 +101,9 @@ h1 img {
  * Bookmarks section style.
  */
 section#bookmarks {
+    width: 100%;
     display: block;
-    margin-top: 6em;
-    padding: 1em;
+    padding: 6em 1em 1em;
 }
 
 /*
