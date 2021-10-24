@@ -19,7 +19,7 @@ showWindow = function(iconURL) {
         queryString += "=";
         queryString += encodeURIComponent(parameters[key]);
     });
-    window.open("<!--{$protocol}--><!--{$server}--><!--{$root}-->?" + queryString, "my-bookmarks-window-for-add");
+    window.open("<!--{$protocol}--><!--{$server}--><!--{$root}-->?" + queryString, "my-bookmarks-window-for-add", "width=600,height=800");
 };
 image = new Image();
 imageURL = "/favicon.ico";
