@@ -41,7 +41,7 @@ switch ($mode) {
     case "save":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Save to database
@@ -80,7 +80,7 @@ switch ($mode) {
     case "delete":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Save to database
@@ -105,7 +105,7 @@ switch ($mode) {
     case "fetch_default_record":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Fetch from database
@@ -124,7 +124,7 @@ switch ($mode) {
     case "renumber_of_sort":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Renumber of sort
@@ -144,7 +144,7 @@ switch ($mode) {
     case "import_from_json":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Import from JSON

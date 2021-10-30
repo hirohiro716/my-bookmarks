@@ -47,7 +47,7 @@ switch ($mode) {
     case "save":
         // Valid token
         if ($session->isValidToken($post->get("token")) == false) {
-            header('HTTP', true, 500);
+            header("HTTP", true, 500);
             exit();
         }
         // Save to database
