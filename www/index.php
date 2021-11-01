@@ -183,7 +183,7 @@ $get = $page->getGetValues();
 $keyword = new StringObject($get->get("keyword"));
 $whereSetArray = array();
 if ($keyword->length() > 0) {
-    $keyword = $keyword->sanitize();
+    $keyword->sanitize();
     $page->assign("keyword", $keyword->get());
     foreach (Column::values() as $column) {
         switch ($column) {
