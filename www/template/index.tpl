@@ -23,7 +23,7 @@ $scent(function() {
     </h2>
     <section id="menu">
         <!--{assign var="key" value="keyword"}-->
-        <input type="text" id="<!--{$key}-->" name="<!--{$key}-->" value="<!--{$keyword|escape}-->" style="display:none;">
+        <input type="text" id="<!--{$key}-->" name="<!--{$key}-->" value="<!--{$keyword}-->" style="display:none;">
         <a id="search" href="javascript:;">
             <img title="検索" alt="検索" src="<!--{$root}-->media/search.svg">
         </a>
@@ -54,21 +54,21 @@ $scent(function() {
                                 <!--{else}-->
                                     <img class="icon" src="<!--{$root}-->media/internet.svg" data-src="<!--{$bookmark.$key}-->">
                                 <!--{/if}-->
-                                <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key|escape}-->">
+                                <input type="hidden" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key}-->">
                                 <!--{assign var="key" value="name"}-->
-                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
+                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
                             </p>
                             <p>
                                 <!--{assign var="key" value="url"}-->
                                 <a href="javascript:;">
                                     <label for="<!--{$key}-->">URL:</label>
                                 </a>
-                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape:"javascript"}-->" original_value="<!--{$bookmark.$key|escape:"javascript"}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                                <input type="text" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                             </p>
                             <p>
                                 <!--{assign var="key" value="labeling"}-->
                                 <label for="<!--{$key}-->">ラベル:</label>
-                                <select name="<!--{$key}-->" original_value="<!--{$bookmark.$key|escape}-->" style="width:calc(100% - 8em);">
+                                <select name="<!--{$key}-->" original_value="<!--{$bookmark.$key}-->" style="width:calc(100% - 8em);">
                                     <!--{if $all_labeling[0]|strlen > 0}-->
                                         <option value=""></option>
                                     <!--{/if}-->
@@ -79,7 +79,7 @@ $scent(function() {
                             <p>
                                 <!--{assign var="key" value="sort_number"}-->
                                 <label for="<!--{$key}-->">並び順:</label>
-                                <input type="number" name="<!--{$key}-->" value="<!--{$bookmark.$key|escape}-->" original_value="<!--{$bookmark.$key|escape}-->" style="width:5em;">
+                                <input type="number" name="<!--{$key}-->" value="<!--{$bookmark.$key}-->" original_value="<!--{$bookmark.$key}-->" style="width:5em;">
                             </p>
                         </div>
                         <div class="right">
@@ -103,14 +103,14 @@ $scent(function() {
                 <p>
                     <!--{assign var="key" value="icon_url"}-->
                     <img class="icon" src="<!--{$sent_values_by_get.$key}-->">
-                    <input type="hidden" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->">
+                    <input type="hidden" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key}-->">
                     <!--{assign var="key" value="name"}-->
-                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key}-->" placeholder="WEBサイト名" style="width:calc(100% - 3em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="url"}-->
                     <label for="<!--{$key}-->">URL:</label>
-                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape:"javascript"}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
+                    <input type="text" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key}-->" placeholder="https://www…" style="width:calc(100% - 5em);">
                 </p>
                 <p>
                     <!--{assign var="key" value="labeling"}-->
@@ -126,7 +126,7 @@ $scent(function() {
                 <p>
                     <!--{assign var="key" value="sort_number"}-->
                     <label for="<!--{$key}-->">並び順:</label>
-                    <input type="number" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key|escape}-->" style="width:5em;">
+                    <input type="number" name="<!--{$key}-->" value="<!--{$sent_values_by_get.$key}-->" style="width:5em;">
                 </p>
             </div>
             <div class="right">
