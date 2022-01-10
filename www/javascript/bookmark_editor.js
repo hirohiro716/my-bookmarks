@@ -37,7 +37,7 @@ function setEventHandler(url, token, idToScroll) {
      * Sub menu
      */
     let subMenu = $('<div></div>');
-    subMenu.css('position', 'fixed');
+    subMenu.css('position', 'absolute');
     subMenu.css('width', '15em');
     subMenu.css('background-color', 'rgba(0,0,0,0.6)');
     subMenu.css('border-radius', '0.7em');
