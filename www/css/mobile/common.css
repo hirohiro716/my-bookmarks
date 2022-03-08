@@ -7,14 +7,14 @@
 /*
  * Input style.
  */
-.AuthPage form p input {
+.AuthPage form div input {
     width: 100%;
 }
 
 /*
  * Label style.
  */
-.AuthPage form p label {
+.AuthPage form div label {
     width: 100%;
     text-align: left;
 }
@@ -42,29 +42,29 @@
 /*
  * Input style.
  */
-.SettingIndexPage form p input[type="text"],
-.SettingIndexPage form p input[type="number"],
-.SettingIndexPage form p input[type="password"] {
+.SettingIndexPage form div input[type="text"],
+.SettingIndexPage form div input[type="number"],
+.SettingIndexPage form div input[type="password"] {
     width: 100%;
 }
 
 /*
  * Anchor style.
  */
-.SettingIndexPage form p span.anchors {
+.SettingIndexPage form div span.anchors {
     width: 100%;
     display: inline-block;
     text-align: left;
 }
 
-.SettingIndexPage form p span.anchors a {
+.SettingIndexPage form div span.anchors a {
     margin-right: 0.2em;
 }
 
 /*
  * Label style.
  */
-.SettingIndexPage form p label {
+.SettingIndexPage form div label {
     width: 100%;
     text-align: left;
 }

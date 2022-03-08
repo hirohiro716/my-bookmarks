@@ -193,7 +193,7 @@ footer {
     align-items: center;
 }
 
-.AuthPage form p {
+.AuthPage form div {
     width: 100%;
     text-align: center;
 }
@@ -390,25 +390,59 @@ footer {
     align-items: center;
 }
 
-.SettingIndexPage form p {
+.SettingIndexPage form div {
     width: 100%;
     text-align: center;
 }
 
-.SettingIndexPage form p:not(:last-child) {
+.SettingIndexPage form div:not(:last-child) {
     margin-bottom: 1em;
 }
 
 /*
  * Label style.
  */
-.SettingIndexPage label {
+.SettingIndexPage form div label {
 	display: inline-block;
 }
 
 /*
  * Button style.
  */
-.SettingIndexPage form button {
+.SettingIndexPage form div button {
     margin-top: 1em;
+}
+
+/*
+ * Bookmarklet style.
+ */
+.SettingIndexPage #bookmarklet {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 18em;
+    max-width: 18em;
+    margin: 0 auto;
+    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: end;
+    gap: 0.5em;
+    border-radius: 1em;
+    background-color: #fff;
+    box-shadow: 0 0 0.5em rgba(0,0,0,0.3);
+}
+
+.SettingIndexPage #bookmarklet h3,
+.SettingIndexPage #bookmarklet p {
+    width: 100%;
+    text-align: left;
+}
+
+.SettingIndexPage #bookmarklet textarea {
+    width: 100%;
+    flex-grow: 1;
+    resize: none;
 }

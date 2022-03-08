@@ -1,5 +1,5 @@
 WARNING=DO NOT MODIFY THIS FILE IF YOU DON'T UNDERSTAND
-defaultDestination=/home/hiro/Documents/docker/my-bookmarks
+defaultDestination=/home/hiro/Documents/docker/vps-hirohiro716/www/bookmark
 defaultVariables=
 eclipse.preferences.version=1
 includeTeamPrivateFiles=false

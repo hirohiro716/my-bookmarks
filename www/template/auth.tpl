@@ -36,14 +36,14 @@ $scent(function() {
     <form method="post">
         <!--{assign var="key" value="mode"}-->
         <input type="hidden" id="<!--{$key}-->" name="<!--{$key}-->" value="auth">
-        <p>
+        <div>
             <!--{assign var="key" value="password"}-->
             <label for="<!--{$key}-->">パスワード</label>
             <input type="password" id="<!--{$key}-->" name="<!--{$key}-->">
-        </p>
-        <p>
+        </div>
+        <div>
             <button type="button">認証</button>
-        </p>
+        </div>
     </form>
 </section>
 
