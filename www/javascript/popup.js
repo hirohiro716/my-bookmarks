@@ -43,6 +43,11 @@ function setEventHandler() {
         values.url = bookmark.attr('url');
         if (window.opener != null) {
             window.opener.postMessage(values, '*');
+        } else {
+            let newWindow = window.open(values.url, 'noopener=yes,noreferrer=yes');
+            setTimeout(function() {
+                window.close();
+            }, 500);
         }
     });
     // Bookmark open in window event
