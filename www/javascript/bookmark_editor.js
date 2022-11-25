@@ -20,14 +20,17 @@ function setEventHandler(url, token, idToScroll) {
             input.css('display', 'inline-block');
             input.css('width', '0em');
             input.animate({'width':'8em', 'opacity':'1'}, 300, function() {
+                $('input, select').attr('tabindex', "-1");
                 input.focus();
                 input.select();
             });
         } else {
-            input.fadeOut(200);
+            input.fadeOut(200, function() {
+                $('input, select').removeAttr('tabindex');
+            });
         }
     });
-    $('input#keyword').on('keyup', function(event) {
+    $('input#keyword').on('keydown', function(event) {
         if (event.keyCode == 13) {
             let input = $(this);
             location.href = url + '?keyword=' + input.val();
