@@ -19,7 +19,6 @@ class IndexPage extends AbstractWebPage
     {
         return "index.tpl";
     }
-    
 }
 
 $page = new IndexPage();

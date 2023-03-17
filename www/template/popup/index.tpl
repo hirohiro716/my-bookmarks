@@ -15,7 +15,7 @@
 
 <script type="text/javascript">
 $(window).bind('load', function() {
-    setEventHandler();
+    setEventHandler('<!--{$root}-->');
 });
 </script>
 
@@ -57,7 +57,7 @@ $(window).bind('load', function() {
                         </span>
                     </a>
                     <img class="edit" src="<!--{$root}-->media/edit.svg">
-                    <img class="open_in_window" src="<!--{$root}-->media/new_window.svg">
+                    <img class="open_in_window" src="<!--{$root}-->media/in_window.svg">
                 </div>
             <!--{/foreach}-->
             <!--{if $isLabeling}-->

@@ -1,7 +1,7 @@
 /**
  * Set event handler.
  */
-function setEventHandler(url, token, idToScroll) {
+function setEventHandler(rootURL, token, idToScroll) {
     // Lazy loading of icons
     $('img.icon').each(function(index, current) {
         let img = $(current);
@@ -33,7 +33,7 @@ function setEventHandler(url, token, idToScroll) {
     $('input#keyword').on('keydown', function(event) {
         if (event.keyCode == 13) {
             let input = $(this);
-            location.href = url + '?keyword=' + input.val();
+            location.href = rootURL + '?keyword=' + input.val();
         }
     });
     /*
@@ -157,7 +157,7 @@ function setEventHandler(url, token, idToScroll) {
         });
         values['token'] = token;
         values['mode'] = 'delete';
-        $scent.post(values, url, function(result) {
+        $scent.post(values, rootURL, function(result) {
             if (result['successed']) {
                 location.reload();
             } else {
@@ -184,11 +184,11 @@ function setEventHandler(url, token, idToScroll) {
         });
         values['token'] = token;
         values['mode'] = 'save';
-        $scent.post(values, url, function(result) {
+        $scent.post(values, rootURL, function(result) {
             if (result['successed']) {
                 alert('保存しました。');
                 if (idToScroll == 'new_row') {
-                    location.href = url;
+                    location.href = rootURL;
                 } else {
                     location.reload();
                 }
@@ -212,7 +212,7 @@ function setEventHandler(url, token, idToScroll) {
         let values = {};
         values['mode'] = 'fetch_default_record';
         values['token'] = token;
-        $scent.post(values, url, function(result) {
+        $scent.post(values, rootURL, function(result) {
             if (result['successed']) {
                 row.find('input, select').each(function(index, current) {
                     let inputOrSelect = $(current);
@@ -240,7 +240,7 @@ function setEventHandler(url, token, idToScroll) {
         let values = {};
         values['token'] = token;
         values['mode'] = 'renumber_of_sort';
-        $scent.post(values, url, function(result) {
+        $scent.post(values, rootURL, function(result) {
             if (result['successed']) {
                 location.reload();
             } else {
@@ -319,7 +319,7 @@ function setEventHandler(url, token, idToScroll) {
         let json = JSON.stringify(array);
         // Send
         let values = {'json': json, 'mode': 'import_from_json', 'token': token};
-        $scent.post(values, url, function(result) {
+        $scent.post(values, rootURL, function(result) {
             if (result['successed']) {
                 location.reload();
             } else {

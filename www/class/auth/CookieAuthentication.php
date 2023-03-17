@@ -246,5 +246,4 @@ class CookieAuthentication extends AbstractRecordMapper
         } catch (Exception $exception) {
         }
     }
-    
 }

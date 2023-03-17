@@ -44,5 +44,4 @@ abstract class AbstractWebPage extends Scent\Smarty\AbstractWebPage
     {
         return "}-->";
     }
-    
 }

@@ -20,7 +20,6 @@ class AuthPage extends AbstractWebPage
     {
         return "auth.tpl";
     }
-    
 }
 
 $page = new AuthPage();

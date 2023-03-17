@@ -9,7 +9,6 @@ class BookmarkletAdd extends AbstractWebPage
     {
         return "setting/bookmarklet_add.tpl";
     }
-    
 }
 
 $page = new BookmarkletAdd();

@@ -21,7 +21,6 @@ class PopupIndexPage extends AbstractWebPage
     {
         return "popup/index.tpl";
     }
-    
 }
 
 $page = new PopupIndexPage();

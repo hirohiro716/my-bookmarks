@@ -21,7 +21,6 @@ class ExportIndexPage extends AbstractWebPage
     {
         return "export/index.tpl";
     }
-    
 }
 
 $page = new ExportIndexPage();

@@ -106,5 +106,4 @@ class Authenticator extends AbstractObject
         $session = new Session();
         $session->remove(self::SESSION_KEY_AUTHENTICATED);
     }
-    
 }

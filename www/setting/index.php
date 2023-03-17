@@ -25,7 +25,6 @@ class SettingIndexPage extends AbstractWebPage
     {
         return "setting/index.tpl";
     }
-    
 }
 
 $page = new SettingIndexPage();

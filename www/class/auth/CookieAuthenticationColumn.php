@@ -29,5 +29,4 @@ class CookieAuthenticationColumn extends AbstractColumn
     {
         return CookieAuthentication::getTableNameStatic();
     }
-    
 }

@@ -29,5 +29,4 @@ class SettingColumn extends AbstractColumn
                 return "設定値";
         }
     }
-    
 }

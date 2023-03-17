@@ -28,5 +28,4 @@ class SettingProperty extends AbstractProperty
                 return "認証失敗JSON";
         }
     }
-    
 }

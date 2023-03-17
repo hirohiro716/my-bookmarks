@@ -45,5 +45,4 @@ class BookmarkColumn extends AbstractColumn
                 return "ソート番号";
         }
     }
-    
 }

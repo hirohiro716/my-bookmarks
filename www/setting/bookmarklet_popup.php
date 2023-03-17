@@ -9,7 +9,6 @@ class BookmarkletPopup extends AbstractWebPage
     {
         return "setting/bookmarklet_popup.tpl";
     }
-    
 }
 
 $page = new BookmarkletPopup();

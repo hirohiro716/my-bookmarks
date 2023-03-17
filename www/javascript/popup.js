@@ -1,7 +1,7 @@
 /**
  * Set event handler.
  */
-function setEventHandler() {
+function setEventHandler(rootURL) {
     // Lazy loading of icons
     $('img.icon').each(function(index, current) {
         let img = $(current);
@@ -38,37 +38,36 @@ function setEventHandler() {
     // Bookmark click event
     $('div.bookmark a').on('click', function(event) {
         let bookmark = $(this);
+        let url = bookmark.attr('url');
+        let newWindow = window.open(url, 'target=_blank,oopener=yes,noreferrer=yes');
+        setTimeout(function() {
+            window.close();
+        }, 500);
+    });
+    // Bookmark open in window event
+    $('div.bookmark img.open_in_window').on('click', function(event) {
+        let bookmark = $(this).parent().find('a');
         let values = {};
         values.mode = 'move';
         values.url = bookmark.attr('url');
         if (window.opener != null) {
             window.opener.postMessage(values, '*');
         } else {
-            let newWindow = window.open(values.url, 'noopener=yes,noreferrer=yes');
+            let newWindow = window.open(values.url, 'target=_blank,noopener=yes,noreferrer=yes');
             setTimeout(function() {
                 window.close();
             }, 500);
         }
     });
-    // Bookmark open in window event
-    $('div.bookmark img.open_in_window').on('click', function(event) {
-        let bookmark = $(this).parent().find('a');
-        let url = bookmark.attr('url');
-        let newWindow = window.open(url, 'noopener=yes,noreferrer=yes');
-        setTimeout(function() {
-            window.close();
-        }, 500);
-    });
     // Bookmark edit event
     $('img.edit').on('click', function(event) {
         let bookmark = $(this).parent();
-        let values = {};
-        values.mode = 'edit';
-        values.id = bookmark.attr('id');
-        if (window.opener != null) {
-            window.opener.postMessage(values, '*');
-        }
-        return false;
+        let id = bookmark.attr('id');
+        let url = rootURL + '?scroll=' + id;
+        let newWindow = window.open(url, 'target=_blank,oopener=yes,noreferrer=yes');
+        setTimeout(function() {
+            window.close();
+        }, 500);
     });
     // Hide wait circle
     $('section#wait_circle').fadeOut(200);

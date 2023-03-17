@@ -14,5 +14,4 @@ class Database extends SQLite
     {
         parent::__construct(__DIR__ . "/../../database/database.db");
     }
-    
 }
