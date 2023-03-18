@@ -39,7 +39,7 @@ function setEventHandler(rootURL) {
     $('div.bookmark a').on('click', function(event) {
         let bookmark = $(this);
         let url = bookmark.attr('url');
-        let newWindow = window.open(url, 'target=_blank,oopener=yes,noreferrer=yes');
+        let newWindow = window.open(url, "_blank", 'noopener=yes,noreferrer=yes');
         setTimeout(function() {
             window.close();
         }, 500);
@@ -53,7 +53,7 @@ function setEventHandler(rootURL) {
         if (window.opener != null) {
             window.opener.postMessage(values, '*');
         } else {
-            let newWindow = window.open(values.url, 'target=_blank,noopener=yes,noreferrer=yes');
+            let newWindow = window.open(values.url, "_blank", 'noopener=yes,noreferrer=yes');
             setTimeout(function() {
                 window.close();
             }, 500);
@@ -64,7 +64,7 @@ function setEventHandler(rootURL) {
         let bookmark = $(this).parent();
         let id = bookmark.attr('id');
         let url = rootURL + '?scroll=' + id;
-        let newWindow = window.open(url, 'target=_blank,oopener=yes,noreferrer=yes');
+        let newWindow = window.open(url, "_blank", 'noopener=yes,noreferrer=yes');
         setTimeout(function() {
             window.close();
         }, 500);
