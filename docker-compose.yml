@@ -4,7 +4,7 @@ services:
     php:
         image: php:7.3-apache
         volumes: 
-            - /home/hiro/Documents/docker/my-bookmarks:/var/www/html
+            - ../../docker/my-bookmarks:/var/www/html
         ports:
             - "80:80"
         container_name: my-bookmarks
