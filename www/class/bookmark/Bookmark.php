@@ -79,7 +79,7 @@ class Bookmark extends AbstractRecordMapper
         $domain = new StringObject($parts[1]);
         $domain = new StringObject($domain->split("/")[0]);
         $iconURL = $protocol . "://" . $domain . "/favicon.ico";
-        if (Helper::isExistURL($iconURL, 1)) {
+        if (Helper::existsURL($iconURL, 1)) {
             $this->getRecord()->put(Column::const(Column::ICON_URL), $iconURL);
         }
     }

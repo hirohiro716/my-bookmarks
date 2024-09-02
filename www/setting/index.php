@@ -69,7 +69,7 @@ switch ($mode) {
             // Remove non-existent setting name
             $postArray = array();
             foreach (Property::properties() as $name) {
-                if ($post->isExistKey($name)) {
+                if ($post->existsKey($name)) {
                     $postArray[$name->getPhysicalName()] = $post->get($name);
                 }
             }

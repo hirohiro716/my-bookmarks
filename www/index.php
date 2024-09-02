@@ -211,7 +211,7 @@ $page->assign("label_and_bookmarks", $labelAndBookmarks);
 // Initial value sent by GET
 $isSentInitialValueByGET = false;
 foreach (Column::columns() as $column) {
-    if ($get->isExistKey($column)) {
+    if ($get->existsKey($column)) {
         $isSentInitialValueByGET = true;
     }
 }

@@ -44,7 +44,7 @@ class Authenticator extends AbstractObject
         }
         $ipAddress = $_SERVER["REMOTE_ADDR"];
         $numberOfAuthenticationFailures = 0;
-        if (ArrayHelper::isExistKey($authenticationFailureArray, $ipAddress)) {
+        if (ArrayHelper::existsKey($authenticationFailureArray, $ipAddress)) {
             $numberOfAuthenticationFailures = $authenticationFailureArray[$ipAddress];
         }
         if ($numberOfAuthenticationFailures >= 3) {
@@ -80,7 +80,7 @@ class Authenticator extends AbstractObject
     {
         CookieAuthentication::authenticate();
         $session = new Session();
-        if ($session->isExistKey(self::SESSION_KEY_AUTHENTICATED)) {
+        if ($session->existsKey(self::SESSION_KEY_AUTHENTICATED)) {
             return $session->get(self::SESSION_KEY_AUTHENTICATED);
         }
         return false;
