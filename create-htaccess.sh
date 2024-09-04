@@ -1,8 +1,6 @@
 #!/bin/sh
 cd `dirname $0`
-content="<Files ~ \"*\">
-deny from all
-< /Files>"
+content="deny from all"
 echo "$content" >.htaccess
 echo "$content" >www/class/.htaccess
 echo "$content" >www/template/.htaccess
