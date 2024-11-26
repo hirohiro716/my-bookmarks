@@ -2,11 +2,10 @@ version: '3'
 
 services:
     php:
-        image: php:7.3-apache
+        image: php:7.4-apache
         volumes: 
-            - ../../docker/my-bookmarks:/var/www/html
+            - ./docker:/var/www/html
         ports:
-            - "80:80"
+            - "8080:80"
         container_name: my-bookmarks
-        user: "${UID}:${GID}"
-
+        user: "www-data:www-data"

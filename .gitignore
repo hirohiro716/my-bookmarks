@@ -1,2 +1,6 @@
+# Vendor Packages
 vendor/
 vendor
+
+# Docker
+docker/
