@@ -6,6 +6,6 @@ services:
         volumes: 
             - ./docker:/var/www/html
         ports:
-            - "8080:80"
+            - "8081:80"
         container_name: my-bookmarks
         user: "www-data:www-data"
