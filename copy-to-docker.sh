@@ -1,4 +1,8 @@
 #!/bin/bash
+if [ ${EUID:-${UID}} != 0 ]; then
+    echo "Please run with Root."
+    exit 1
+fi
 currentDirectory=`pwd`
 dockerDirectory=$currentDirectory/docker
 if [ ! -d $dockerDirectory ]; then

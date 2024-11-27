@@ -1,4 +1,8 @@
-#!/bin/sh
+#!/bin/bash
+if [ ${EUID:-${UID}} != 0 ]; then
+    echo "Please run with Root."
+    exit 1
+fi
 cd `dirname $0`
 content="deny from all"
 echo "$content" >docker/class/.htaccess
