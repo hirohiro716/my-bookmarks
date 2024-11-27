@@ -15,3 +15,4 @@ fi
 find $dockerDirectory/ -type f -print0 | xargs -0 chmod 660
 find $dockerDirectory/ -type d -print0 | xargs -0 chmod 770
 chown -R www-data:www-data $dockerDirectory/*
+chown root:root $dockerDirectory/composer.*
