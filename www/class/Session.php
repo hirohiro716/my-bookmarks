@@ -16,6 +16,6 @@ class Session extends Scent\Session
      */
     public function __construct()
     {
-        parent::__construct(null, AbstractWebPage::REQUIRE_SECURE_CONNECTION);
+        parent::__construct(null, true);
     }
 }
