@@ -18,5 +18,5 @@ if [ ! -d $dockerDirectory/template/compile ]; then
 fi
 find $dockerDirectory/ -type f -print0 | xargs -0 chmod 660
 find $dockerDirectory/ -type d -print0 | xargs -0 chmod 770
-chown -R www-data:www-data $dockerDirectory/*
+chown -R 33:33 $dockerDirectory/*
 chown root:root $dockerDirectory/composer.*
