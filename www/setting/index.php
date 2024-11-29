@@ -28,10 +28,6 @@ class SettingIndexPage extends AbstractWebPage
 }
 
 $page = new SettingIndexPage();
-if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
-    echo "Your connection is not secure.";
-    exit();
-}
 if (Authenticator::isAuthenticated() != true) {
     $url = new StringObject($_SERVER["SCRIPT_NAME"]);
     $referer = "setting/index.php";

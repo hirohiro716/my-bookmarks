@@ -23,10 +23,6 @@ class AuthPage extends AbstractWebPage
 }
 
 $page = new AuthPage();
-if (AbstractWebPage::REQUIRE_SECURE_CONNECTION && $page->isHTTPS() == false) {
-    echo "Your connection is not secure.";
-    exit();
-}
 // Referer
 $request = $page->getRequestValues();
 $referer = new StringObject($request->get("referer"));
