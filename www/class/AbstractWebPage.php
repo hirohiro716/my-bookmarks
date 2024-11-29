@@ -11,7 +11,7 @@ use hirohiro716\Scent\Helper;
 abstract class AbstractWebPage extends Scent\Smarty\AbstractWebPage
 {
     
-    public const REQUIRE_SECURE_CONNECTION = false;
+    public const REQUIRE_SECURE_CONNECTION = true;
     
     public function __construct()
     {
