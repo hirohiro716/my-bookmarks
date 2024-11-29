@@ -9,3 +9,4 @@ services:
         ports:
             - "8081:80"
         user: "www-data:www-data"
+        restart: always
