@@ -15,5 +15,5 @@ echo "$content" >${operationalDirectory}database/.htaccess
 echo "$content" >${operationalDirectory}vendor/.htaccess
 find ./ -type f -name ".htaccess" | xargs chmod 660
 if [ -d docker ]; then
-    find $operationalDirectory -type f -name ".htaccess" | xargs chown www-data:www-data
+    find $operationalDirectory -type f -name ".htaccess" | xargs chown 33:33
 fi

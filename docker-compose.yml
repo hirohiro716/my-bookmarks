@@ -4,9 +4,9 @@ services:
     php:
         image: php:7.4-apache
         container_name: my-bookmarks
-        volumes: 
+        volumes:
             - ./docker:/var/www/html
         ports:
             - "8081:80"
-        user: "www-data:www-data"
+        user: "33:33"
         restart: always
